@@ -1,0 +1,45 @@
+﻿@inherits LayoutComponentBase
+
+
+
+<AuthorizeView>
+    <Authorized>
+    <NavMenu></NavMenu>
+    
+    <section class="page-content"> 
+        
+        <TopBar context=@context></TopBar>
+        @Body
+
+        <Footer></Footer>
+
+    </section>
+        @* <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
+        <form method="post" action="Identity/Account/LogOut">
+            <button type="submit" class="nav-link btn btn-link">Log out</button>
+        </form> *@
+    </Authorized>
+    <NotAuthorized>
+        <a href="Identity/Account/Register">Register</a>
+        <a href="Identity/Account/Login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+
+
+
+@* <div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="top-row px-4 auth">
+        <LoginDisplay />
+        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+    </div>
+
+    <div class="content px-4">
+        @Body
+    </div>
+</div> *@

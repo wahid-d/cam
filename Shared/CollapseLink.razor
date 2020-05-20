@@ -1,0 +1,18 @@
+@inject IJSRuntime JSRuntime
+
+<li>
+    <button @ref="collapseBtn" @onclick="CollapseClicked" class="collapse-btn" aria-expanded="true" aria-label="collapse menu"> 
+        <i class="fas fa-chevron-up fa-rotate-270 "></i>
+        <span>Collapse</span>
+    </button>
+</li>
+
+@code {
+    
+    ElementReference collapseBtn;
+
+    public async Task CollapseClicked()
+    {
+        await JSRuntime.InvokeVoidAsync("collapseBtnClicked", collapseBtn);
+    }
+}

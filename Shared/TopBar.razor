@@ -1,0 +1,21 @@
+<section class="search-and-user">
+    <form >
+        <input type="search" placeholder="Search ...">
+        <button type="submit" aria-label="submit form">
+            <i class="fas fa-search fa-2x"></i>
+        </button>
+    </form>
+    <div class="admin-profile">
+        <span class="greeting">Hello @context.User.Identity.Name!</span>
+        <div class="notifications">
+            <span class="badge">2</span>
+            <i class="fas fa-user fa-2x"></i>
+        </div>
+    </div>
+</section>
+
+@code 
+{
+    [Parameter]
+    public AuthenticationState context {get;set;}
+}

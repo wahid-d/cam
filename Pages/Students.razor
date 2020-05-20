@@ -1,0 +1,53 @@
+@page "/students"
+@using cam.Models
+@using cam.Services
+@inject IStudentService studentRepo
+
+<section class="page-body">
+    <div class="table-wrapper card">
+        <table>
+            <caption class="title-1">List of students</caption>
+            <thead>
+                <tr>
+                    @foreach (var header in headers)
+                    {
+                        <th scope="col">@header</th>
+                        
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in students)
+                {
+                    <tr>
+                        <td data-label=@headers[0]>@student.EnglishName</td>
+                        <td data-label=@headers[1]>@student.KoreanName</td>
+                        <td data-label=@headers[2]>@student.Phone</td>
+                        <td data-label=@headers[3]>@student.Level</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@code
+{
+    List<Student> students = new List<Student>()
+    {
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Birthdate = DateTime.Now, Phone = "1231231231"},
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Birthdate = DateTime.Now, Phone = "1231231231"},
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Birthdate = DateTime.Now, Phone = "1231231231"},
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Birthdate = DateTime.Now, Phone = "1231231231"},
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Birthdate = DateTime.Now, Phone = "1231231231"}
+    };
+
+    List<string> headers = new List<string>() {"Engish Name", "Korean Name", "Phone", "Level"};
+    
+    protected override async Task OnInitializedAsync()
+    {
+        students = await studentRepo.Get();
+        StateHasChanged();
+    }
+
+}

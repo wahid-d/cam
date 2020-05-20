@@ -1,0 +1,18 @@
+@inject IJSRuntime JSRuntime;
+
+<button @ref="toggleBtn" @onclick="ToggleClicked" @onfocusout="ToggleUnfocused"  class="toggle-mob-menu" aria-expanded="false" aria-label="open menu"> 
+    <i class="fas fa-bars fa-2x"></i>
+</button>
+
+@code {
+    ElementReference toggleBtn;
+
+    public async Task ToggleClicked()
+    {
+        await JSRuntime.InvokeVoidAsync("toggleBtnClicked", toggleBtn);
+    }
+    public async Task ToggleUnfocused()
+    {
+        await JSRuntime.InvokeVoidAsync("toggleUnfocused", toggleBtn);
+    }
+}
