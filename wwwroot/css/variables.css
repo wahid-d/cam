@@ -18,3 +18,23 @@
     --border-radius: 4px;
     --box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.075);
 }
+/* :root {
+    --page-txtColor: #002b36;
+    --page-content-bgColor: #073642;
+    /* --page-content-bgColor-hover: #1d2636; */
+    /* --page-bgColor: #93a1a1; */
+    /* --page-content-bgColor: #586e75; */
+    --page-content-bgColor-hover: #657b83;
+    --page-header-width: 220px;
+    --page-content-bgColor: #eee8d5;
+    --page-bgColor: #fdf6e3;
+    --green: #859900;
+    --yellow: #b58900;
+    --white: #b58900;
+    --black: #333;
+    --blue: #b58900;
+    --red: #dc322f;
+    --magenta: #d33682;
+    --border-radius: 4px;
+    --box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.075);
+} */

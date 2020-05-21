@@ -6,10 +6,10 @@ namespace cam.Data
 {
     public class AppUser : IdentityUser
     {
-        [Required]
+        // [Required]
         public string EnglishName { get; set; }
         
-        [Required]
+        // [Required]
         public string KoreanName { get; set; }
         public string Phone { get; set; }
         public DateTime Birthdate { get; set; }

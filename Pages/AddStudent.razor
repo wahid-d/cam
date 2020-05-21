@@ -6,7 +6,9 @@
 
 <section class="page-body">
     <div class="form-wrapper card">
-        <form>
+        <EditForm Model="@student" OnValidSubmit="SaveStudent">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
             <h2 class="title-1">Register a student</h2>
             <label class="label-1" for="ename">Engish name<small>*</small></label>
             <input type="text" id="ename" required @bind="student.EnglishName">
@@ -25,15 +27,15 @@
             <input type="date" id="birthdate" @bind="student.Birthdate">
             <label class="label-1" for="address">address</label>
             <input type="address" id="address" @bind="student.Address">
-            <button type="submit" class="submit-btn" @onclick="SaveStudent">
+            <button type="submit" class="submit-btn">
                 Submit
             </button>
-        </form>
+        </EditForm>
     </div>
 </section>
 
 @code{
-    List<string> levels = new List<string>(){"Primary 1", "Primary 2", "Primary 3", "Primary 4", "Primary 5", "Primary 6"};
+    List<string> levels = new List<string>(){"Select ...", "Primary 1", "Primary 2", "Primary 3", "Primary 4", "Primary 5", "Primary 6"};
     Student student = new Student(){Birthdate = DateTime.Now};
 
     private void SaveStudent()

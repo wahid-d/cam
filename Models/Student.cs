@@ -10,26 +10,28 @@ namespace cam.Models
         public Guid Id { get; set; }
 
         [Required]
+        [StringLength(255, ErrorMessage = "Name is too long.")]
         public string EnglishName { get; set; }
 
         [Required]
+        [StringLength(255, ErrorMessage = "Name is too long.")]
         public string KoreanName { get; set; }
 
         [Required]
+        [StringLength(20)]
         public string Level { get; set; }
 
+        [StringLength(20, ErrorMessage = "Phone number is too long.")]
         public string Phone { get; set; }
 
+        [StringLength(255, ErrorMessage = "Address is too long.")]
         public string Address { get; set; }
 
         public DateTime Birthdate { get; set; }
 
-        public bool Validate()
-        {
-            return !string.IsNullOrWhiteSpace(this.EnglishName) &&
-            !string.IsNullOrWhiteSpace(this.KoreanName) &&
-            !string.IsNullOrWhiteSpace(this.Level);
-        }
+
+        public Guid ClassId { get; set; }
+        public Class Class { get; set; }
 
     }
 }
