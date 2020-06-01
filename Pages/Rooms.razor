@@ -1,0 +1,82 @@
+@page "/rooms"
+@using cam.Models
+@using cam.Services
+@inject NavigationManager NavigationManager
+@inject IUserService userRepo
+@inject IRoomService roomRepo
+@inject IClassService classRepo
+
+
+<section class="page-body">
+    @foreach(var room in rooms)
+    {
+        <div class="card-fluid">
+            <h2 class="title-1">@room.Name</h2>
+
+            <ul class="list">
+                @foreach(var c in room.Classes)
+                {
+                    <li class="list-item">
+                        @c.Name - <label class="label-1">@c.Time</label>
+                    </li>
+                }
+            </ul>
+
+            <label class="label-1" >Supervisor - @room.SupervisorUserName</label>
+        </div>
+    }
+    <div class="card-fluid">
+        <h2 class="title-1">Add Room</h2>
+        <EditForm Model="@room" OnValidSubmit="SaveRoom">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+        <label class="label-1" for="name">Room name<small>*</small></label>
+        <input type="text" id="name" required @bind="room.Name">
+        <label class="label-1" for="supervisor">Supervisor<small>*</small></label>
+        <select type="text" id="supervisor" required @bind="room.SupervisorUserName">
+            <option value="">Select...</option>
+            @foreach (var teacher in teachers)
+            {
+                <option value=@teacher.UserName>@teacher.UserName</option>
+            }
+        </select>
+        <button type="submit" class="submit-btn">
+                Add
+        </button>
+        </EditForm>
+    </div>
+
+
+</section>
+
+
+
+@code
+{
+    List<Room> rooms = new List<Room>();
+    List<Data.AppUser> teachers = new List<Data.AppUser>();
+    List<Class> classes = new List<Class>();
+
+    Room room = new Room();
+
+    protected override async Task OnInitializedAsync()
+    {
+        rooms = await roomRepo.Get();
+        foreach (var room in rooms)
+        {   
+            room.Classes = await classRepo.GetForRoom(room.Id);
+        }
+        StateHasChanged();
+        teachers = await userRepo.Get();
+        StateHasChanged();
+    }
+
+    private async void SaveRoom()
+    {
+        await roomRepo.Insert(room);
+        rooms = await roomRepo.Get();
+        room = new Room();
+        StateHasChanged();
+    }
+
+}

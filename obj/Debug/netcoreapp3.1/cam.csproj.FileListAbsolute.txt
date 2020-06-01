@@ -254,3 +254,9 @@
 /Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/_ViewImports.cshtml.g.cs
 /Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/_ViewStart.cshtml.g.cs
 /Users/david/repos/cam/bin/Debug/netcoreapp3.1/app.db
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Rooms.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/Rooms.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Report.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/Report.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Reports.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/Reports.razor.g.cs

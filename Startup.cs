@@ -32,7 +32,10 @@ namespace cam
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
+            // services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
+            
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")), ServiceLifetime.Transient);
+            
             services.AddDefaultIdentity<AppUser>(options => 
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -48,6 +51,10 @@ namespace cam
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
             services.AddSingleton<WeatherForecastService>();
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRoomService, RoomService>();
+            services.AddTransient<IClassService, ClassService>();
+            services.AddTransient<IReportService, ReportService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

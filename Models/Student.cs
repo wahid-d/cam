@@ -7,7 +7,8 @@ namespace cam.Models
     public class Student
     {
         [Key]
-        public Guid Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string Id { get; set; }
 
         [Required]
         [StringLength(255, ErrorMessage = "Name is too long.")]
@@ -30,8 +31,7 @@ namespace cam.Models
         public DateTime Birthdate { get; set; }
 
 
-        public Guid ClassId { get; set; }
+        public string ClassId { get; set; }
         public Class Class { get; set; }
-
     }
 }

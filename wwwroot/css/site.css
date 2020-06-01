@@ -1,4 +1,24 @@
 
+
+.list-item
+{
+    padding: .2rem;
+    font-size: 18px;
+    font-weight: bold;
+    margin: .5rem 0;
+    border-style: solid;
+    border-width: 3px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: var(--page-header-headingColor);
+}
+.list-item:hover
+{
+    background-color: var(--page-content-bgColor-hover);
+}
+
+
 * {
     padding: 0;
     margin: 0;
@@ -24,9 +44,10 @@ button {
 
 input, select {
     -webkit-appearance: none;
+    margin-bottom: 12px;
 }
 
-button, input {
+button, input, textarea {
     border: none;
 }
 
@@ -135,9 +156,10 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-size: 12px;
-    margin-top: 12px;
     color: var(--page-header-headingColor);
 }
+
+
 .title-1 {
     text-transform: uppercase;
     letter-spacing: 0.2em;
@@ -198,7 +220,7 @@ body {
 }
 
 
-input, select, .submit-btn{
+input, select, textarea, .submit-btn{
     width: 100%;
     height: 50px;
     font-size: 1rem;
@@ -207,7 +229,10 @@ input, select, .submit-btn{
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
-.card input, select{
+.card input, select, textarea{
+    background-color: var(--page-bgColor);
+}
+.card-fluid input, select, textarea{
     background-color: var(--page-bgColor);
 }
 
@@ -223,11 +248,12 @@ select
     border-color: transparent;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     outline: none !important;
     border: 2px solid var(--page-txtColor-tint);
     background-color: var(--page-content-bgColor-hover);
 }
+
 
 .search-and-user ::placeholder {
     color: var(--page-txtColor-tint);
@@ -540,12 +566,16 @@ table th {
 
 
 .card-fluid{
-    grid-column: span 3;
-    max-height: 200px;
+    grid-column: span 4;
     overflow: hidden;
     background-color: var(--page-content-bgColor);
     border-radius: var(--border-radius);
     padding: 1rem;
+    margin: 0 1rem auto 1rem;
+}
+
+.card-fluid:hover, .card-fluid:focus{
+    box-shadow: var(--card-shadow);
 }
 
 @media screen 
@@ -562,6 +592,11 @@ and (max-width: 1024px)  {
     .form-wrapper{
         grid-column: 3 / span 8;
     }
+
+    .card-fluid
+    {
+        grid-column: span 6;
+    }
     
 }
 
@@ -570,6 +605,10 @@ and (max-width: 1024px)  {
 
     .form-wrapper{
         grid-column: 2 / span 10;
+    }
+    .card-fluid
+    {
+        grid-column: span 6;
     }
     
 }
@@ -582,6 +621,10 @@ and (max-width: 480px){
     .card
     {
         padding: 2rem .5rem;
+    }
+    .card-fluid
+    {
+        grid-column: span 12;
     }
 }
 

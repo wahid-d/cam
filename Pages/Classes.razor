@@ -3,9 +3,121 @@
 @using cam.Services
 @inject NavigationManager NavigationManager
 @inject IStudentService studentRepo
+@inject IRoomService roomRepo
+@inject IClassService classRepo
 
 <section class="page-body">
+    @foreach(var c in classes)
+    {
+        <div class="card-fluid" @onclick="@( e => NavigationManager.NavigateTo($"/report/{c.Id}"))">
+            <h2 class="title-1">@c.Name</h2>
+
+
+            @{
+                <ul class="list">
+                @foreach(var student in c.Students)
+                {
+                    <li class="list-item">
+                        @student.EnglishName - @student.KoreanName
+                    </li>
+                }
+                </ul>
+
+                var r = rooms.Where(r => r.Id == c.RoomId).FirstOrDefault();
+                <label class="label-1" >Room - <strong>@r.Name</strong></label>
+            }
+        </div>
+    }
     <div class="card-fluid">
-        <h2 class="title-1">Unassigned</h2>
+        <h2 class="title-1">Add Class</h2>
+        <EditForm Model="@cl" OnValidSubmit="SaveClass">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+        <label class="label-1" for="name">Class Name<small>*</small></label>
+        <input type="text" id="name" required @bind="cl.Name">
+
+        <label class="label-1" for="time">Class Time<small>*</small></label>
+        <select type="text" id="time" required @bind="cl.Time">
+            <option>Select...</option>
+            @foreach (var t in classTimes)
+            {
+                <option value=@t>@t</option>
+            }
+        </select>
+
+        <label class="label-1" for="cbook">Course Book<small>*</small></label>
+        <select type="text" id="cbook" required @bind="cl.CourseBook">
+            <option>Select...</option>
+            @foreach (var cbook in cBooks)
+            {
+                <option value=@cbook>@cbook</option>
+            }
+        </select>
+        
+        <label class="label-1" for="gbook">Grammar Book<small>*</small></label>
+        <select type="text" id="gbook" required @bind="cl.GrammarBook">
+            <option>Select...</option>
+            @foreach (var gbook in gBooks)
+            {
+                <option value=@gbook>@gbook</option>
+            }
+        </select>
+
+        <label class="label-1" for="room">Room<small>*</small></label>
+        <select type="text" id="room" required @bind="cl.RoomId">
+            <option>Select...</option>
+            @foreach (var room in rooms)
+            {
+                <option value=@room.Id>@room.Name</option>
+            }
+        </select>
+
+        <button type="submit" class="submit-btn">
+                Add
+        </button>
+        </EditForm>
     </div>
 </section>
+
+@functions
+{
+    async Task<Room> Get(string id)
+    {
+        return await roomRepo.Get(id);
+    }
+
+}
+
+@code
+{
+    List<string> classTimes = new List<string>(){ "2:00", "3:40", "5:10"};
+    List<string> cBooks = new List<string>(){ "Get Smart", "Top Stars", "Young Stars", "Jumper", "Skipper", "Runner", "Bridge", "The Class"};
+    List<string> gBooks = new List<string>(){ "Smart Grammar", "Best Grammar", "3800재"};
+    List<Room> rooms = new List<Room>();
+    List<Student> students = new List<Student>();
+    List<Class> classes = new List<Class>();
+    
+    Class cl = new Class();
+    protected override async Task OnInitializedAsync()
+    {
+        rooms = await roomRepo.Get();
+        StateHasChanged();
+        students = await studentRepo.Get();
+        StateHasChanged();
+        classes = await classRepo.Get();
+        foreach(var c in classes)
+        {
+            c.Students = students.Where(s=>s.ClassId == c.Id).ToList();
+        }
+        StateHasChanged();
+    }
+
+    private async void SaveClass()
+    {
+        await classRepo.Insert(cl);
+        classes = await classRepo.Get();
+        cl = new Class();
+        StateHasChanged();
+    }
+
+}

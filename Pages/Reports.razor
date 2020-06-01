@@ -1,0 +1,47 @@
+@page "/reports"
+@using cam.Models
+@using cam.Services
+@inject NavigationManager NavigationManager
+@inject IClassService classRepo
+@inject IStudentService studentRepo
+@inject IReportService reportRepo
+
+<section class="page-body">
+    <div class="table-wrapper card">
+        <table>
+            <caption class="title-1">Reports</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Period</th>
+                    <th scope="col">Student</th>
+                    <th scope="col">See</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var report in reports)
+                {
+                    <tr>
+                        <td data-label=@report.Id>@report.Period</td>
+                        <td data-label=@report.Id> @(students.Where(s=>s.Id == report.StudentId).FirstOrDefault().EnglishName) </td>
+                        <td data-label=@report.Id> <button class="submit-btn">See Report</button> </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@code
+{
+    List<Models.Report> reports = new List<Models.Report>();
+    List<Student> students = new List<Student>();
+    List<Class> classes = new List<Class>();
+
+     protected override async Task OnInitializedAsync()
+    {
+        classes = await classRepo.Get();
+        students = await studentRepo.Get();
+        reports = await reportRepo.Get();
+        StateHasChanged();
+    }
+}
