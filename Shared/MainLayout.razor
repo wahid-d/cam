@@ -1,27 +1,22 @@
 ﻿@inherits LayoutComponentBase
 
-
-
 <AuthorizeView>
     <Authorized>
-    <NavMenu></NavMenu>
-    
-    <section class="page-content"> 
+        <NavMenu></NavMenu>
         
-        <TopBar context=@context></TopBar>
-        @Body
+        <section class="page-content"> 
+            <TopBar context=@context></TopBar>
+            @Body
 
-        <Footer></Footer>
-
-    </section>
-        @* <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
-        <form method="post" action="Identity/Account/LogOut">
-            <button type="submit" class="nav-link btn btn-link">Log out</button>
-        </form> *@
+            <Footer></Footer>
+        </section>
+            @* <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
+            <form method="post" action="Identity/Account/LogOut">
+                <button type="submit" class="nav-link btn btn-link">Log out</button>
+            </form> *@
     </Authorized>
     <NotAuthorized>
-        <a href="Identity/Account/Register">Register</a>
-        <a href="Identity/Account/Login">Log in</a>
+        <LoginDisplay></LoginDisplay>
     </NotAuthorized>
 </AuthorizeView>
 

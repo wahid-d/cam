@@ -260,3 +260,11 @@
 /Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/Report.razor.g.cs
 /Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Reports.razor.g.cs
 /Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/Reports.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Shared/ReportsLink.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Shared/ReportsLink.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/PrintReport.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Shared/PrintLayout.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/PrintReport.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Shared/PrintLayout.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Notifications.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/Notifications.razor.g.cs

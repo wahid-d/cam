@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using cam.Data;
 using cam.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace cam.Services
 {
     public interface IStudentService
     {
         Task<List<Student>> Get();
-        // Task<Student> Get(int id);
+        Task<Student> Get(string id);
         Task<Student> Insert(Student student);
         // Task<Student> Update(ToDo toDo);
         // Task<Student> Delete(int id);
@@ -29,6 +30,10 @@ namespace cam.Services
         public async Task<List<Student>> Get()
         {
             return await _context.Students.ToListAsync();
+        }
+        public async Task<Student> Get(string id)
+        {
+            return await _context.Students.Where(s => s.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<Student> Insert(Student student)

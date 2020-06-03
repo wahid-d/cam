@@ -15,12 +15,13 @@
 
             @{
                 <ul class="list">
-                @foreach(var student in c.Students)
-                {
-                    <li class="list-item">
-                        @student.EnglishName - @student.KoreanName
-                    </li>
-                }
+                @if(c.Students != null)
+                    @foreach(var student in c.Students)
+                    {
+                        <li class="list-item">
+                            @student.EnglishName - @student.KoreanName
+                        </li>
+                    }
                 </ul>
 
                 var r = rooms.Where(r => r.Id == c.RoomId).FirstOrDefault();

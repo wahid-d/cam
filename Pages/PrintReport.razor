@@ -1,0 +1,65 @@
+@page "/printreport/{reportId}"
+@layout PrintLayout
+@using cam.Models
+@using cam.Services
+@inject IStudentService studentRepo
+@inject IReportService reportRepo
+@inject INotificationsService notificationRepo
+
+<div>
+    <button onclick="window.print()" class="submit-btn" style="margin: 1rem auto;">Print</button>
+</div>
+<div class="printable">
+    <h1>Cambridge English</h1>
+    <h3>@report.Period</h3>
+    <h2>@student.EnglishName - @student.KoreanName</h2>
+    <table>
+        <caption>Scores</caption>
+        <thead>
+            <tr>
+                <th>Course Book Score</th>
+                <th>Grammar Score</th>
+                <th>ELT Online Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@report.CourseScore</td>
+                <td>@report.GrammarScore</td>
+                <td>@report.EltScore</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Teacher's comment:</h4>
+    @if(report.Comment != null)
+    {
+        <p>@report.Comment</p>
+    }
+
+    <h4>Notification:</h4>
+    @if(notification != null)
+    {
+        <p>@notification.Content</p>
+    }
+
+</div>
+
+@code{
+
+    [Parameter]
+    public string reportId { get; set; }
+    public Student student = new Student();
+    public Models.Report report = new Models.Report();
+    public Notification notification = new Notification();
+
+     protected override async Task OnInitializedAsync()
+    {
+
+        report = await reportRepo.Get(reportId);
+        student = await studentRepo.Get(report.StudentId);
+        notification = await notificationRepo.Get(report.Period);
+        StateHasChanged();
+    }
+
+}

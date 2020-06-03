@@ -13,6 +13,7 @@ namespace cam.Data
         public DbSet<Class> Classes { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

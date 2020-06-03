@@ -14,12 +14,13 @@
             <h2 class="title-1">@room.Name</h2>
 
             <ul class="list">
-                @foreach(var c in room.Classes)
-                {
-                    <li class="list-item">
-                        @c.Name - <label class="label-1">@c.Time</label>
-                    </li>
-                }
+                @if(room.Classes != null)
+                    @foreach(var c in room.Classes)
+                    {
+                        <li class="list-item">
+                            @c.Name - <label class="label-1">@c.Time</label>
+                        </li>
+                    }
             </ul>
 
             <label class="label-1" >Supervisor - @room.SupervisorUserName</label>

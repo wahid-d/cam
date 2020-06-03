@@ -8,6 +8,13 @@
 
 <section class="page-body">
     <div class="table-wrapper card">
+        <label class="label-1" for="period">Select the period<small>*</small></label>
+        <select type="text" id="period" required @onchange="@(e => {sortedReports = e.Value.ToString() == "All" ? reports : reports.Where(r => r.Period.ToLower() == e.Value.ToString().ToLower()).ToList(); StateHasChanged();})">
+            <option >All</option>
+            <option value="@String.Format("{0:MMM} {1}", DateTime.Now.AddMonths(-1), DateTime.Now.Year)">@DateTime.Now.AddMonths(-1).ToString("MMMM")</option>
+            <option value="@String.Format("{0:MMM} {1}", DateTime.Now, DateTime.Now.Year)">@DateTime.Now.ToString("MMMM")</option>
+            <option value="@String.Format("{0:MMM} {1}", DateTime.Now.AddMonths(1), DateTime.Now.Year)">@DateTime.Now.AddMonths(1).ToString("MMMM")</option>
+        </select>
         <table>
             <caption class="title-1">Reports</caption>
             <thead>
@@ -18,12 +25,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var report in reports)
+                @foreach (var report in sortedReports)
                 {
                     <tr>
                         <td data-label=@report.Id>@report.Period</td>
                         <td data-label=@report.Id> @(students.Where(s=>s.Id == report.StudentId).FirstOrDefault().EnglishName) </td>
-                        <td data-label=@report.Id> <button class="submit-btn">See Report</button> </td>
+                        <td data-label=@report.Id> 
+                            @* <a href="/printreport/{@report.Id}">See</a> *@
+                            <button onclick="window.open('/printreport/@report.Id', 'Report', 'location=0, status=0, scrollbars=1,resizable=0, width=650,height=910').moveTo(0,0)" class="badge">See Report</button> 
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -34,14 +44,15 @@
 @code
 {
     List<Models.Report> reports = new List<Models.Report>();
+    List<Models.Report> sortedReports = new List<Models.Report>();
     List<Student> students = new List<Student>();
     List<Class> classes = new List<Class>();
-
+    public string period;
      protected override async Task OnInitializedAsync()
     {
         classes = await classRepo.Get();
         students = await studentRepo.Get();
-        reports = await reportRepo.Get();
+        reports = sortedReports = await reportRepo.Get();
         StateHasChanged();
     }
 }
