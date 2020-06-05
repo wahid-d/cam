@@ -34,13 +34,16 @@
     <h4>Teacher's comment:</h4>
     @if(report.Comment != null)
     {
-        <p>@report.Comment</p>
+        <textarea class="comment-box" oninput='this.value = this.value.trim(); this.style.height = "";this.style.height = this.scrollHeight + "px"' value=@report.Comment>
+        </textarea>
     }
 
     <h4>Notification:</h4>
     @if(notification != null)
     {
-        <p>@notification.Content</p>
+        <textarea class="notification-box">
+            @notification.Content
+        </textarea>
     }
 
 </div>
