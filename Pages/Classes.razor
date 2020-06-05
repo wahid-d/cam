@@ -9,7 +9,7 @@
 <section class="page-body">
     @foreach(var c in classes)
     {
-        <div class="card-fluid" @onclick="@( e => NavigationManager.NavigateTo($"/report/{c.Id}"))">
+        <div class="card-fluid" style="margin-top:1rem;" @onclick="@( e => NavigationManager.NavigateTo($"/report/{c.Id}"))">
             <h2 class="title-1">@c.Name</h2>
 
 
