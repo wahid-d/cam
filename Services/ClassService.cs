@@ -36,6 +36,15 @@ namespace cam.Services
 
             return @class;
         }
+
+        public async Task<Class> Update(Class @class)
+        {
+            var c = await _context.Classes.Where(c => c.Id == @class.Id).FirstOrDefaultAsync();
+            c.RoomId = @class.RoomId;
+            _context.Classes.Update(c);
+            await _context.SaveChangesAsync();
+            return c;
+        }
     }
 
     public interface IClassService
@@ -44,5 +53,7 @@ namespace cam.Services
         Task<Class> Get(string id);
         Task<List<Class>> GetForRoom(string roomId);
         Task<Class> Insert(Class @class);
+
+        Task<Class> Update(Class @class);
     }
 }

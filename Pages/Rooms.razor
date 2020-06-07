@@ -7,44 +7,32 @@
 @inject IClassService classRepo
 
 
-<section class="page-body">
+<section class="grid-container">
     @foreach(var room in rooms)
     {
-        <div class="card-fluid">
-            <h2 class="title-1">@room.Name</h2>
-
-            <ul class="list">
-                @if(room.Classes != null)
-                    @foreach(var c in room.Classes)
-                    {
-                        <li class="list-item">
-                            @c.Name - <label class="label-1">@c.Time</label>
-                        </li>
-                    }
-            </ul>
-
-            <label class="label-1" >Supervisor - @room.SupervisorUserName</label>
-        </div>
+        <RoomCard Room=room Dragged="@Dragged" OnDragStart="DragStart"/>
     }
-    <div class="card-fluid">
-        <h2 class="title-1">Add Room</h2>
-        <EditForm Model="@room" OnValidSubmit="SaveRoom">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-        <label class="label-1" for="name">Room name<small>*</small></label>
-        <input type="text" id="name" required @bind="room.Name">
-        <label class="label-1" for="supervisor">Supervisor<small>*</small></label>
-        <select type="text" id="supervisor" required @bind="room.SupervisorUserName">
-            <option value="">Select...</option>
-            @foreach (var teacher in teachers)
-            {
-                <option value=@teacher.UserName>@teacher.UserName</option>
-            }
-        </select>
-        <button type="submit" class="submit-btn">
-                Add
-        </button>
-        </EditForm>
+    <div class="grid-25 mobile-grid-100 tablet-grid-50 suffix-75 card-fluid">
+        <div class="card-body">
+            <h2 class="title-1">Add Room</h2>
+            <EditForm Model="@room" OnValidSubmit="SaveRoom">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+            <label class="label-1" for="name">Room name<small>*</small></label>
+            <input type="text" id="name" required @bind="room.Name">
+            <label class="label-1" for="supervisor">Supervisor<small>*</small></label>
+            <select type="text" id="supervisor" required @bind="room.SupervisorUserName">
+                <option value="">Select...</option>
+                @foreach (var teacher in teachers)
+                {
+                    <option value=@teacher.UserName>@teacher.UserName</option>
+                }
+            </select>
+            <button type="submit" class="submit-btn">
+                    Add
+            </button>
+            </EditForm>
+        </div>
     </div>
 
 
@@ -57,6 +45,8 @@
     List<Room> rooms = new List<Room>();
     List<Data.AppUser> teachers = new List<Data.AppUser>();
     List<Class> classes = new List<Class>();
+
+    public Class Dragged { get; set; }
 
     Room room = new Room();
 
@@ -77,6 +67,12 @@
         await roomRepo.Insert(room);
         rooms = await roomRepo.Get();
         room = new Room();
+        StateHasChanged();
+    }
+
+    void DragStart(Class @class)
+    {
+        Dragged=@class;
         StateHasChanged();
     }
 

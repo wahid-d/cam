@@ -268,3 +268,7 @@
 /Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Shared/PrintLayout.razor.g.cs
 /Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Notifications.razor.g.cs
 /Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/Notifications.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/ClassCard.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/ClassCard.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/RoomCard.razor.g.cs
+/Users/david/repos/cam/obj/Debug/netcoreapp3.1/Razor/Pages/RoomCard.razor.g.cs

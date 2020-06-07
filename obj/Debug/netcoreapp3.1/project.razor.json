@@ -356,6 +356,183 @@
       },
       {
         "Kind": "Components.Component",
+        "Name": "cam.Pages.PrintReport",
+        "AssemblyName": "cam",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "PrintReport",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "reportId",
+            "TypeName": "System.String",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "reportId"
+            },
+            "BoundAttributeParameters": []
+          }
+        ],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "cam.Pages.PrintReport"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "cam.Pages.PrintReport",
+        "AssemblyName": "cam",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "cam.Pages.PrintReport",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "reportId",
+            "TypeName": "System.String",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "reportId"
+            },
+            "BoundAttributeParameters": []
+          }
+        ],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "cam.Pages.PrintReport",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "cam.Pages.Students",
+        "AssemblyName": "cam",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Students",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "cam.Pages.Students"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "cam.Pages.Students",
+        "AssemblyName": "cam",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "cam.Pages.Students",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "cam.Pages.Students",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "cam.Pages.Reports",
+        "AssemblyName": "cam",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Reports",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "cam.Pages.Reports"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "cam.Pages.Reports",
+        "AssemblyName": "cam",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "cam.Pages.Reports",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "cam.Pages.Reports",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
         "Name": "cam.Pages.Report",
         "AssemblyName": "cam",
         "Documentation": null,
@@ -435,55 +612,6 @@
       },
       {
         "Kind": "Components.Component",
-        "Name": "cam.Pages.Reports",
-        "AssemblyName": "cam",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Reports",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "cam.Pages.Reports"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "cam.Pages.Reports",
-        "AssemblyName": "cam",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "cam.Pages.Reports",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "cam.Pages.Reports",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "Kind": "Components.Component",
         "Name": "cam.Pages.Rooms",
         "AssemblyName": "cam",
         "Documentation": null,
@@ -528,55 +656,6 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "cam.Pages.Rooms",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "cam.Pages.Students",
-        "AssemblyName": "cam",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Students",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "cam.Pages.Students"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "cam.Pages.Students",
-        "AssemblyName": "cam",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "cam.Pages.Students",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "cam.Pages.Students",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -631,14 +710,14 @@
       },
       {
         "Kind": "Components.Component",
-        "Name": "cam.Pages.PrintReport",
+        "Name": "cam.Pages.ClassCard",
         "AssemblyName": "cam",
         "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "PrintReport",
+            "TagName": "ClassCard",
             "ParentTag": null,
             "TagStructure": 0,
             "Attributes": [],
@@ -648,15 +727,44 @@
         "BoundAttributes": [
           {
             "Kind": "Components.Component",
-            "Name": "reportId",
-            "TypeName": "System.String",
+            "Name": "Dragged",
+            "TypeName": "cam.Models.Student",
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
             "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
-              "Common.PropertyName": "reportId"
+              "Common.PropertyName": "Dragged"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Class",
+            "TypeName": "cam.Models.Class",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "Class"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "OnDragStart",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<cam.Models.Student>",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "OnDragStart",
+              "Components.EventCallback": "True"
             },
             "BoundAttributeParameters": []
           }
@@ -665,19 +773,19 @@
         "Diagnostics": [],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "cam.Pages.PrintReport"
+          "Common.TypeName": "cam.Pages.ClassCard"
         }
       },
       {
         "Kind": "Components.Component",
-        "Name": "cam.Pages.PrintReport",
+        "Name": "cam.Pages.ClassCard",
         "AssemblyName": "cam",
         "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "cam.Pages.PrintReport",
+            "TagName": "cam.Pages.ClassCard",
             "ParentTag": null,
             "TagStructure": 0,
             "Attributes": [],
@@ -687,15 +795,44 @@
         "BoundAttributes": [
           {
             "Kind": "Components.Component",
-            "Name": "reportId",
-            "TypeName": "System.String",
+            "Name": "Dragged",
+            "TypeName": "cam.Models.Student",
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
             "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
-              "Common.PropertyName": "reportId"
+              "Common.PropertyName": "Dragged"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Class",
+            "TypeName": "cam.Models.Class",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "Class"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "OnDragStart",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<cam.Models.Student>",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "OnDragStart",
+              "Components.EventCallback": "True"
             },
             "BoundAttributeParameters": []
           }
@@ -704,7 +841,144 @@
         "Diagnostics": [],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "cam.Pages.PrintReport",
+          "Common.TypeName": "cam.Pages.ClassCard",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "cam.Pages.RoomCard",
+        "AssemblyName": "cam",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "RoomCard",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Room",
+            "TypeName": "cam.Models.Room",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "Room"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Dragged",
+            "TypeName": "cam.Models.Class",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "Dragged"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "OnDragStart",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<cam.Models.Class>",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "OnDragStart",
+              "Components.EventCallback": "True"
+            },
+            "BoundAttributeParameters": []
+          }
+        ],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "cam.Pages.RoomCard"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "cam.Pages.RoomCard",
+        "AssemblyName": "cam",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "cam.Pages.RoomCard",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Room",
+            "TypeName": "cam.Models.Room",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "Room"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Dragged",
+            "TypeName": "cam.Models.Class",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "Dragged"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "OnDragStart",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<cam.Models.Class>",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "OnDragStart",
+              "Components.EventCallback": "True"
+            },
+            "BoundAttributeParameters": []
+          }
+        ],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "cam.Pages.RoomCard",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -22162,6 +22436,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/david/repos/cam/Pages/ClassCard.razor",
+      "TargetPath": "Pages\\ClassCard.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/Users/david/repos/cam/Pages/Error.razor",
       "TargetPath": "Pages\\Error.razor",
       "FileKind": "component"
@@ -22235,6 +22514,11 @@
       "FilePath": "/Users/david/repos/cam/Areas/Identity/Pages/Account/Manage/DownloadPersonalData.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\DownloadPersonalData.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/david/repos/cam/Pages/RoomCard.razor",
+      "TargetPath": "Pages\\RoomCard.razor",
+      "FileKind": "component"
     },
     {
       "FilePath": "/Users/david/repos/cam/Shared/ToggleLink.razor",

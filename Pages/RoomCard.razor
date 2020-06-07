@@ -1,0 +1,73 @@
+@using cam.Models
+@using cam.Services
+@inject NavigationManager NavigationManager
+@inject IClassService classRepo
+@inject IRoomService roomRepo
+
+<div class="grid-30 mobile-grid-100 tablet-grid-50 card-fluid @dragClass" style="margin-top:1rem;"
+        ondragover="event.preventDefault()"
+        @ondrop="@(e => HandleDrop())" >
+    <div class="card-body">
+        <h2 class="title-1">@Room.Name</h2>
+
+        <ul class="list">
+            @if(Classes != null)
+                @foreach(var c in Classes)
+                {
+                    <li class="list-item" draggable="true" @ondragstart="@(e => {OnDragStart.InvokeAsync(c); HandleDragStart(c);})">
+                        @c.Name - <label class="label-1">@c.Time</label>
+                    </li>
+                }
+        </ul>
+
+        <label class="label-1" >Supervisor - @Room.SupervisorUserName</label>
+    </div>
+</div>
+
+@code
+{
+    [Parameter] public Room Room { get; set; }
+
+    [Parameter] public Class Dragged { get; set; }
+
+    public List<Class> Classes { get; set; }
+
+    [Parameter] public EventCallback<Class> OnDragStart { get; set; }
+
+    string dragClass = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Classes = await classRepo.GetForRoom(Room.Id);
+    }
+
+    void HandleDragStart(Class  @class)
+    {
+        Classes.Remove(@class);
+    }
+
+    void OnDragEnter()
+    {
+        System.Console.WriteLine($"Dragenter - {Room.Name}");
+        dragClass="dragging";
+        StateHasChanged();
+    }
+
+    void OnDragLeave()
+    {
+        System.Console.WriteLine("dragend");
+        dragClass = "";
+        StateHasChanged();
+    }
+
+    async void HandleDrop()
+    {
+        if(Dragged != null && !Classes.Exists(e => e.Id == Dragged.Id))
+        {
+            Classes.Add(Dragged);
+            Dragged.RoomId = Room.Id;
+            var r = await classRepo.Update(Dragged);
+        }
+
+    }
+}

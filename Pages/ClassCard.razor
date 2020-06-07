@@ -1,0 +1,59 @@
+@using cam.Models
+@using cam.Services
+@inject NavigationManager NavigationManager
+@inject IStudentService studentRepo
+@inject IRoomService roomRepo
+
+<div  class="grid-30 mobile-grid-100 tablet-grid-50 card-fluid" style="margin-top:1rem;" 
+        @onclick="@( e => NavigationManager.NavigateTo($"/report/{Class.Id}"))"
+        @ondrop="@(e => HandleDrop())" 
+        ondragover="event.preventDefault()">
+    <div class="card-body" >
+        <h2 class="title-1">@Class.Name</h2>
+        @{
+            <ul class="list">
+            @if(Students != null)
+                @foreach(var student in Students)
+                {
+                    <li class="list-item" draggable="true" @ondragstart="@(e => {OnDragStart.InvokeAsync(student); HandleDragStart(student);})">
+                        @student.EnglishName - @student.KoreanName
+                    </li>
+                }
+            </ul>
+
+            @* var r = rooms.Where(r => r.Id == c.RoomId).FirstOrDefault();
+            <label class="label-1" >Room - <strong>@r.Name</strong></label> *@
+        }
+    </div>
+</div>
+
+@code
+{   
+    [Parameter] public Student Dragged { get; set; } = new Student();
+    [Parameter] public Class Class { get; set; }
+
+    public List<Student> Students { get; set; }
+
+
+    [Parameter] public EventCallback<Student> OnDragStart {get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Students = await studentRepo.GetForClass(Class.Id);
+    }
+
+    async void HandleDrop()
+    {
+        if(Dragged != null && !Students.Exists(e => e.Id == Dragged.Id))
+        {
+            Students.Add(Dragged);
+            Dragged.ClassId = Class.Id;
+            var s = await studentRepo.Update(Dragged);
+        }
+    }
+
+    void HandleDragStart(Student student)
+    {
+        Students.Remove(student);
+    }
+}

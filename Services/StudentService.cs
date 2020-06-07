@@ -12,9 +12,10 @@ namespace cam.Services
     public interface IStudentService
     {
         Task<List<Student>> Get();
+        Task<List<Student>> GetForClass(string classId);
         Task<Student> Get(string id);
         Task<Student> Insert(Student student);
-        // Task<Student> Update(ToDo toDo);
+        Task<Student> Update(Student student);
         // Task<Student> Delete(int id);
     }
 
@@ -31,6 +32,10 @@ namespace cam.Services
         {
             return await _context.Students.ToListAsync();
         }
+        public async Task<List<Student>> GetForClass(string classId)
+        {
+            return await _context.Students.Where(s => s.ClassId == classId).ToListAsync();
+        }
         public async Task<Student> Get(string id)
         {
             return await _context.Students.Where(s => s.Id == id).FirstOrDefaultAsync();
@@ -44,5 +49,13 @@ namespace cam.Services
             return student;
         }
 
+        public async Task<Student> Update(Student student)
+        {
+            var s = await _context.Students.Where(s => s.Id == student.Id).FirstOrDefaultAsync();
+            s.ClassId = student.ClassId;
+            _context.Students.Update(s);
+            await _context.SaveChangesAsync();
+            return student;
+        }
     }
 }

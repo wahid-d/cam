@@ -1,5 +1,10 @@
 
-
+.dragging
+{
+    border-style: dashed;
+    border-width: 2px;
+    border-color: var(--white);
+}
 
 
 
@@ -146,16 +151,13 @@
 
 .list-item
 {
-    padding: .2rem;
+    padding: .2rem .5rem;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 300;
     margin: .5rem 0;
-    border-style: solid;
-    border-width: 3px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-color: var(--page-header-headingColor);
+    border:none;
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 .list-item:hover
 {
@@ -306,7 +308,7 @@ body {
 
 .title-1 {
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
     font-size: 24px;
     margin-top: 16px;
     color: var(--page-textColor);
@@ -710,16 +712,18 @@ table th {
 
 
 .card-fluid{
-    grid-column: span 4;
-    overflow: hidden;
     background-color: var(--page-content-bgColor);
     border-radius: var(--border-radius);
-    padding: 1rem;
-    margin: 0 1rem auto 1rem;
+    margin: .5rem
 }
 
 .card-fluid:hover, .card-fluid:focus{
     box-shadow: var(--card-shadow);
+}
+
+.card-body
+{
+    margin: 1rem;
 }
 
 @media screen 
@@ -737,10 +741,6 @@ and (max-width: 1024px)  {
         grid-column: 3 / span 8;
     }
 
-    .card-fluid
-    {
-        grid-column: span 6;
-    }
     
 }
 
@@ -749,10 +749,6 @@ and (max-width: 1024px)  {
 
     .form-wrapper{
         grid-column: 2 / span 10;
-    }
-    .card-fluid
-    {
-        grid-column: span 6;
     }
     
 }
@@ -765,10 +761,6 @@ and (max-width: 480px){
     .card
     {
         padding: 2rem .5rem;
-    }
-    .card-fluid
-    {
-        grid-column: span 12;
     }
 }
 
