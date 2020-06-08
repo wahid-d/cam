@@ -18,9 +18,11 @@
             <label class="label-1" for="kname">Korean name<small>*</small></label>
             <input type="text" id="kname" required @bind="student.KoreanName">
 
+            <label class="label-1" for="school">School<small>*</small></label>
+            <input type="text" id="school" required @bind="student.SchoolName">
+
             <label class="label-1" for="phone">phone number<small>*</small></label>
             <input type="tel" id="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" required @bind="student.Phone">
-
 
             <label class="label-1" for="address">address</label>
             <input type="address" id="address" @bind="student.Address">
