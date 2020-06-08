@@ -18,14 +18,16 @@
                 <option value="@String.Format("{0:MMM} {1}", DateTime.Now, DateTime.Now.Year)">@DateTime.Now.ToString("MMMM")</option>
                 <option value="@String.Format("{0:MMM} {1}", DateTime.Now.AddMonths(1), DateTime.Now.Year)">@DateTime.Now.AddMonths(1).ToString("MMMM")</option>
             </select>
+
+
             <table width=100%>
                 <caption class="title-1">@_class.Name</caption>
                 <thead>
-                    <tr>
-                        <th width=15% scope="col">Name</th>
-                        <th width=10% scope="col">Course </th>
-                        <th width=10% scope="col">Grammar</th>
-                        <th width=10% scope="col">ELT Score</th>
+                    <tr style="height: 8rem;">
+                        <th width=10% scope="col">Name</th>
+                        <th width=5% scope="col" class="vertical">Course </th>
+                        <th width=5% scope="col" class="vertical">Grammar</th>
+                        <th width=5% scope="col" class="vertical">ELT</th>
                         <th width=25% scope="col">Comment</th>
                     </tr>
                 </thead>
