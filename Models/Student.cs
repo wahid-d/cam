@@ -22,16 +22,11 @@ namespace cam.Models
         public string KoreanName { get; set; }
 
         [Required]
-<<<<<<< HEAD
-        [StringLength(55, ErrorMessage = "School name is too long.")]
-        [Display(Prompt="신도림 초등학교", Name="학교 이름")]
-=======
         [StringLength(55, ErrorMessage = "Grade is is too long.")]
         public string Grade { get; set; }
 
         [Required]
         [StringLength(55, ErrorMessage = "School name is too long.")]
->>>>>>> d5dabed737940cec4df9d0bad5003aea055ed62d
         public string SchoolName { get; set; }
 
         [Required]
@@ -53,7 +48,5 @@ namespace cam.Models
         [Display(Name="클래스 선택")]        
         public string ClassId { get; set; }
         public Class Class { get; set; }
-
-        
     }
 }
