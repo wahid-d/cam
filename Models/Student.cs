@@ -23,10 +23,12 @@ namespace cam.Models
 
         [Required]
         [StringLength(55, ErrorMessage = "Grade is is too long.")]
+        [Display(Prompt="초등 1", Name="학년")]
         public string Grade { get; set; }
 
         [Required]
         [StringLength(55, ErrorMessage = "School name is too long.")]
+        [Display(Prompt="신도림 초등학교", Name="학교 이름")]
         public string SchoolName { get; set; }
 
         [Required]

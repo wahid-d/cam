@@ -9,11 +9,11 @@
     <div class="form-wrapper card">
         <EditForm Model="@student" OnValidSubmit="SaveStudent">
             <DataAnnotationsValidator />
-            <ValidationSummary />
+
             <h2 class="title-1">Register a student</h2>
 
-            <label class="label-1" for="ename">Engish name<small>*</small></label>
-            <input type="text" id="ename" required @bind="student.EnglishName">
+            <label class="label-1" for="ename">영어 이름<small>*</small></label>
+            <input type="text" id="ename" required @bind="student.EnglishName" placeholder="Sarah">
 
             <label class="label-1" for="kname">Korean name<small>*</small></label>
             <input type="text" id="kname" required @bind="student.KoreanName">
