@@ -21,8 +21,6 @@
             <label class="label-1" for="phone">phone number<small>*</small></label>
             <input type="tel" id="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" required @bind="student.Phone">
 
-            <label class="label-1" for="birthdate">birthdate</label>
-            <input type="date" id="birthdate" @bind="student.Birthdate">
 
             <label class="label-1" for="address">address</label>
             <input type="address" id="address" @bind="student.Address">
@@ -53,7 +51,7 @@
 
 @code{
     List<string> levels = new List<string>(){"Select ...", "Primary 1", "Primary 2", "Primary 3", "Primary 4", "Primary 5", "Primary 6"};
-    Student student = new Student(){Birthdate = DateTime.Now};
+    Student student = new Student();
 
     List<Class> classes = new List<Class>();
     
