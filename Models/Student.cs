@@ -20,7 +20,11 @@ namespace cam.Models
         public string KoreanName { get; set; }
 
         [Required]
-        [StringLength(55, ErrorMessage = "Shool name is too long.")]
+        [StringLength(55, ErrorMessage = "Grade is is too long.")]
+        public string Grade { get; set; }
+
+        [Required]
+        [StringLength(55, ErrorMessage = "School name is too long.")]
         public string SchoolName { get; set; }
 
         [Required]
