@@ -21,8 +21,7 @@ namespace cam.Services
 
         public async Task<AppUser> Insert(AppUser AppUser)
         {
-            
-
+   
             return AppUser;
         }
     }
