@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "/Users/HSpark/.dotnet/store/|arch|/|tfm|",
-      "/Users/HSpark/.nuget/packages"
-    ]
-  }
-}
