@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/Users/david/.dotnet/store/|arch|/|tfm|",
-      "/Users/david/.nuget/packages"
+      "/Users/HSpark/.dotnet/store/|arch|/|tfm|",
+      "/Users/HSpark/.nuget/packages"
     ]
   }
 }

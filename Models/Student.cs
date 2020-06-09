@@ -20,7 +20,7 @@ namespace cam.Models
         public string KoreanName { get; set; }
 
         [Required]
-        [StringLength(55, ErrorMessage = "Shool name is too long.")]
+        [StringLength(55, ErrorMessage = "School name is too long.")]
         public string SchoolName { get; set; }
 
         [Required]
@@ -29,10 +29,12 @@ namespace cam.Models
 
         [Required]
         [StringLength(20, ErrorMessage = "Phone number is too long.")]
+        [Display(Prompt="01012345678")]
         public string Phone { get; set; }
 
         [Required]
         [StringLength(255, ErrorMessage = "Address is too long.")]
+        [Display(Prompt="신도림동 현대 아파트", Name="주소")]
         public string Address { get; set; }
 
         public string ClassId { get; set; }
