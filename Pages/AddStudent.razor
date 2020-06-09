@@ -19,7 +19,7 @@
             <input type="text" id="kname" required @bind="student.KoreanName" placeholder="홍길동">
 
             <label class="label-1" for="phone">전화번호<small>*</small></label>
-            <input type="tel" id="phone" pattern="[0-9]{3}(\-\s)?[0-9]{4}(-\s)?[0-9]{4}" required @bind="student.Phone" placeholder="010 1234 5678">
+            <input type="tel" id="phone" pattern="[0-9]{3}(\-\s)?[0-9]{4}(\-\s)?[0-9]{4}" required @bind="student.Phone" placeholder="010 1234 5678">
 
             <label class="label-1" for="address">주소</label>
             <input type="address" id="address" @bind="student.Address" placeholder="신도림동 현대 아파트">

@@ -13,6 +13,7 @@ namespace cam.Models
 
         [Required]
         [StringLength(255, ErrorMessage = "Name is too long.")]
+        [Display()]
         public string EnglishName { get; set; }
 
         [Required]
