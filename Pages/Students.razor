@@ -23,7 +23,7 @@
                         <td data-label=@headers[1]>@student.KoreanName</td>
                         <td data-label=@headers[2]>@student.Phone</td>
                         <td data-label=@headers[3]>@student.Level</td>
-                        <td data-label=@headers[3]><button class="badge" @onclick="@( async() => { await HandleRemove(student); } )">Remove</button></td>
+                        <td data-label=@headers[3]><button class="badge" style="background-color: red;" @onclick="@( async() => { await HandleRemove(student); } )">Remove</button></td>
                     </tr>
                 }
             </tbody>
