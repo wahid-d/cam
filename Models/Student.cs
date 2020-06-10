@@ -13,11 +13,7 @@ namespace cam.Models
 
         [Required]
         [StringLength(255, ErrorMessage = "Name is too long.")]
-<<<<<<< HEAD
-        [Display(Prompt="Sarah", Name="영어 이름")]
-=======
         [Display()]
->>>>>>> 511064c5caddb650b1a40c4a92990b890ab8b093
         public string EnglishName { get; set; }
 
         [Required]
@@ -26,17 +22,7 @@ namespace cam.Models
         public string KoreanName { get; set; }
 
         [Required]
-<<<<<<< HEAD
-        [StringLength(55, ErrorMessage = "Grade is is too long.")]
-        [Display(Prompt="초등 1", Name="학년")]
-        public string Grade { get; set; }
-
-        [Required]
         [StringLength(55, ErrorMessage = "School name is too long.")]
-        [Display(Prompt="신도림 초등학교", Name="학교 이름")]
-=======
-        [StringLength(55, ErrorMessage = "School name is too long.")]
->>>>>>> 511064c5caddb650b1a40c4a92990b890ab8b093
         public string SchoolName { get; set; }
 
         [Required]
@@ -46,11 +32,7 @@ namespace cam.Models
 
         [Required]
         [StringLength(20, ErrorMessage = "Phone number is too long.")]
-<<<<<<< HEAD
-        [Display(Prompt="010 1234 5678", Name="전화번호")]
-=======
         [Display(Prompt="01012345678")]
->>>>>>> 511064c5caddb650b1a40c4a92990b890ab8b093
         public string Phone { get; set; }
 
         [Required]
