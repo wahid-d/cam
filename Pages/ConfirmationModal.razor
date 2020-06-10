@@ -1,0 +1,27 @@
+@inject IModalDialogService ModalDialogService
+
+<button @onclick="Ok_Clicked" class="btn-yes btn-modal">Yes</button>
+<button @onclick="Cancel_Clicked" class="btn-cancel btn-modal">Cancel</button>
+
+
+@code
+{
+    void Ok_Clicked()
+    {
+        try
+        {
+            ModalDialogService.Close(true);
+
+        }
+        catch (Exception ex)
+        {
+            // pass the exception back to the ShowDialogAsync call that opened the Dialog
+            ModalDialogService.Close(ex);
+        }
+    }
+
+    void Cancel_Clicked()
+    {
+        ModalDialogService.Close(false);
+    }
+}

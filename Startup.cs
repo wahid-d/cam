@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using cam.Areas.Identity;
 using cam.Data;
 using cam.Services;
+using Blazor.ModalDialog;
 
 namespace cam
 {
@@ -56,6 +49,13 @@ namespace cam
             services.AddTransient<IClassService, ClassService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<INotificationsService, NotificationsService>();
+
+
+            services.AddSingleton<NotifyService>();
+
+
+            // Modal Dialog
+            services.AddModalDialog();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

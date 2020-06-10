@@ -3,6 +3,11 @@
 @inject NavigationManager NavigationManager
 @inject IClassService classRepo
 @inject IRoomService roomRepo
+@inject IModalDialogService ModalDialog
+@inject NotifyService Notify
+@implements IDisposable 
+
+
 
 <div class="grid-30 mobile-grid-100 tablet-grid-50 card-fluid @dragClass" style="margin-top:1rem;"
         ondragover="event.preventDefault()"
@@ -14,7 +19,7 @@
             @if(Classes != null)
                 @foreach(var c in Classes)
                 {
-                    <li class="list-item" draggable="true" @ondragstart="@(e => {OnDragStart.InvokeAsync(c); HandleDragStart(c);})">
+                    <li class="list-item" draggable="true" @ondragstart="@(e => { OnDragStart.InvokeAsync(c); })">
                         @c.Name - <label class="label-1">@c.Time</label>
                     </li>
                 }
@@ -38,36 +43,45 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Notify.NotifyDelete += RemoveDragged;
         Classes = await classRepo.GetForRoom(Room.Id);
     }
 
-    void HandleDragStart(Class  @class)
+    public async Task RemoveDragged()
     {
-        Classes.Remove(@class);
+        await InvokeAsync(() =>
+        {
+            Classes.Remove(Dragged);
+            StateHasChanged();
+        });
     }
 
-    void OnDragEnter()
-    {
-        System.Console.WriteLine($"Dragenter - {Room.Name}");
-        dragClass="dragging";
-        StateHasChanged();
-    }
-
-    void OnDragLeave()
-    {
-        System.Console.WriteLine("dragend");
-        dragClass = "";
-        StateHasChanged();
-    }
 
     async void HandleDrop()
     {
-        if(Dragged != null && !Classes.Exists(e => e.Id == Dragged.Id))
+        ModalDialogOptions options = new ModalDialogOptions()
         {
-            Classes.Add(Dragged);
-            Dragged.RoomId = Room.Id;
-            var r = await classRepo.Update(Dragged);
-        }
+            BackgroundClickToClose = false,
+            Style = "liquid-modal-dialog-title"
+        };
 
+        ModalDialogResult result = await ModalDialog.ShowDialogAsync<ConfirmationModal>($"Do you wish to move {Dragged.Name} to {Room.Name} ?", options);
+
+        if(result.Success)
+        {
+            if(Dragged != null && !Classes.Exists(e => e.Id == Dragged.Id))
+            {
+                Dragged.RoomId = Room.Id;
+                var r = await classRepo.Update(Dragged);
+                await Notify.Delete();
+                Classes.Add(Dragged);
+                StateHasChanged();
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        Notify.NotifyDelete -= RemoveDragged;
     }
 }

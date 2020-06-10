@@ -1,3 +1,35 @@
+
+
+.liquid-modal-dialog-title {
+    color: var(--white) !important;
+    font-weight: normal;
+    letter-spacing: .1rem;
+    left: 50% !important;
+}
+
+.btn-modal
+{
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--white);
+    letter-spacing: .1rem;
+    padding: .5rem;
+    border-radius: var(--border-radius);
+    margin: 0 .5rem;
+}
+
+.btn-cancel
+{
+    background-color: var(--red);
+}
+
+.btn-yes
+{
+    background-color: var(--blue);
+
+}
+
 .vertical{
     writing-mode:tb-rl;
     -webkit-transform:rotate(-90deg);
