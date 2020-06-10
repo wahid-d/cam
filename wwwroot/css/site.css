@@ -302,8 +302,8 @@ body {
 
 .label-1 {
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-size: 13px;
     color: var(--page-header-headingColor);
 }
 
