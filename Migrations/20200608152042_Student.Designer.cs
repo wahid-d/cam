@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cam.Data;
 
 namespace cam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200608152042_Student")]
+    partial class Student
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -343,10 +345,6 @@ namespace cam.Migrations
                         .HasMaxLength(255);
 
                     b.Property<string>("ClassId")
-<<<<<<< HEAD
-                        .IsRequired()
-=======
->>>>>>> 511064c5caddb650b1a40c4a92990b890ab8b093
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("EnglishName")
@@ -354,14 +352,6 @@ namespace cam.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-<<<<<<< HEAD
-                    b.Property<string>("Grade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(55)")
-                        .HasMaxLength(55);
-
-=======
->>>>>>> 511064c5caddb650b1a40c4a92990b890ab8b093
                     b.Property<string>("KoreanName")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
@@ -453,13 +443,7 @@ namespace cam.Migrations
                 {
                     b.HasOne("cam.Models.Class", "Class")
                         .WithMany("Students")
-<<<<<<< HEAD
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-=======
                         .HasForeignKey("ClassId");
->>>>>>> 511064c5caddb650b1a40c4a92990b890ab8b093
                 });
 #pragma warning restore 612, 618
         }

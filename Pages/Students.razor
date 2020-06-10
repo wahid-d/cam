@@ -24,6 +24,7 @@
                         <td data-label=@headers[1]>@student.KoreanName</td>
                         <td data-label=@headers[2]>@student.Phone</td>
                         <td data-label=@headers[3]>@student.Level</td>
+                        <td data-label=@headers[4]>@student.SchoolName</td>
                     </tr>
                 }
             </tbody>
@@ -33,9 +34,20 @@
 
 @code
 {
+<<<<<<< HEAD
     List<Student> students = new List<Student>();
+=======
+    List<Student> students = new List<Student>()
+    {
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Phone = "1231231231"},
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Phone = "1231231231"},
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Phone = "1231231231"},
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Phone = "1231231231"},
+        new Student(){EnglishName = "Steve", KoreanName = "ㅈㄷㄱㅈㄷㄱㅈㄷㄱ", Level = "Primary 1", Phone = "1231231231"}
+    };
+>>>>>>> 511064c5caddb650b1a40c4a92990b890ab8b093
 
-    List<string> headers = new List<string>() {"Engish Name", "Korean Name", "Phone", "Level"};
+    List<string> headers = new List<string>() {"Engish Name", "Korean Name", "Phone", "Level", "School Name"};
     
     protected override async Task OnInitializedAsync()
     {
