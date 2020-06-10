@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace cam.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -229,11 +229,12 @@ namespace cam.Migrations
                     Id = table.Column<string>(nullable: false),
                     EnglishName = table.Column<string>(maxLength: 255, nullable: false),
                     KoreanName = table.Column<string>(maxLength: 255, nullable: false),
+                    SchoolName = table.Column<string>(maxLength: 55, nullable: false),
                     Level = table.Column<string>(maxLength: 20, nullable: false),
-                    Phone = table.Column<string>(maxLength: 20, nullable: true),
-                    Address = table.Column<string>(maxLength: 255, nullable: true),
-                    Birthdate = table.Column<DateTime>(nullable: false),
-                    ClassId = table.Column<string>(nullable: true)
+                    Grade = table.Column<int>(nullable: false),
+                    Phone = table.Column<string>(maxLength: 20, nullable: false),
+                    Address = table.Column<string>(maxLength: 255, nullable: false),
+                    ClassId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -243,7 +244,7 @@ namespace cam.Migrations
                         column: x => x.ClassId,
                         principalTable: "Classes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

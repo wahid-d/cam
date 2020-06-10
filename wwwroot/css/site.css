@@ -1,4 +1,5 @@
 
+::placeholder{  opacity: .3; }
 
 .liquid-modal-dialog-title {
     color: var(--white) !important;
@@ -128,9 +129,6 @@
 {
     width: 210mm;
     height: 297mm;
-    border-color: black;
-    border-width: 2px;
-    border-style: solid;
     margin: auto;
     box-shadow: none;
 }
@@ -143,12 +141,14 @@
 {
     background-color: transparent;
 }
+.printable table th
+{
+    border: 2px solid var(--page-txtColor-tint);
+}
 .printable table td
 {
-    border-style: dashed;
-    border-width: 3px;
-    border-color: black;
     padding: .2rem;
+    border: 2px solid var(--page-txtColor-tint);
 }
 .printable textarea:focus
 {
@@ -196,18 +196,19 @@
 .printable table tr {
     border-bottom: 2px solid var(--page-txtColor-tint);
     padding: .1em;
-  }
+}
 .printable thead tr {
     background-color:  transparent;
     padding: .1em;
-  }
+}
 
 
 .printable table th,
 .printable table td {
-  padding: .3rem;
-  text-align: center;
-  font-size: 1rem;
+    padding: .3rem;
+    text-align: center;
+    font-size: 1rem;
+    border: 2px solid var(--page-txtColor-tint);
 }
 
 .printable table th {
@@ -726,25 +727,20 @@ table caption
 
 table tr {
     border-bottom: 2px solid var(--page-txtColor-tint);
-    padding: .35em;
   }
 thead tr {
     background-color:  var(--page-bgColor);
-    padding: .35em;
-  }
-  tbody tr:hover{
-      background-color: var(--page-content-bgColor-hover);
   }
 
 table th,
 table td {
-  padding: 1rem;
   text-align: center;
   font-size: 1rem;
+  padding: .5rem .3rem;
 }
 
 table th {
-    font-size: 1.2em;
+    font-size: 1em;
     letter-spacing: .1em;
     text-transform: uppercase;
   }

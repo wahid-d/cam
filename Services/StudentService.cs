@@ -16,7 +16,8 @@ namespace cam.Services
         Task<Student> Get(string id);
         Task<Student> Insert(Student student);
         Task<Student> Update(Student student);
-        // Task<Student> Delete(int id);
+        Task Delete(string id);
+        Task Delete(Student student);
     }
 
     public class StudentService : IStudentService
@@ -28,10 +29,30 @@ namespace cam.Services
             _context = context;
         }
 
+        public async Task Delete(string id)
+        {
+            var student = await Get(id);
+            await Delete(student);
+        }
+
+        public async Task Delete(Student student)
+        {
+            try
+            {
+                _context.Students.Remove(student);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+        }
+
         public async Task<List<Student>> Get()
         {
             return await _context.Students.ToListAsync();
         }
+
         public async Task<List<Student>> GetForClass(string classId)
         {
             return await _context.Students.Where(s => s.ClassId == classId).ToListAsync();

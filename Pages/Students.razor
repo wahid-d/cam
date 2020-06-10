@@ -2,6 +2,7 @@
 @using cam.Models
 @using cam.Services
 @inject IStudentService studentRepo
+@inject IModalDialogService ModalDialog
 
 <section class="page-body">
     <div class="table-wrapper card">
@@ -12,7 +13,6 @@
                     @foreach (var header in headers)
                     {
                         <th scope="col">@header</th>
-                        
                     }
                 </tr>
             </thead>
@@ -20,11 +20,10 @@
                 @foreach (var student in students)
                 {
                     <tr>
-                        <td data-label=@headers[0]>@student.EnglishName</td>
                         <td data-label=@headers[1]>@student.KoreanName</td>
                         <td data-label=@headers[2]>@student.Phone</td>
                         <td data-label=@headers[3]>@student.Level</td>
-                        <td data-label=@headers[4]>@student.SchoolName</td>
+                        <td data-label=@headers[3]><button class="badge" @onclick="@( async() => { await HandleRemove(student); } )">Remove</button></td>
                     </tr>
                 }
             </tbody>
@@ -36,12 +35,30 @@
 {
     List<Student> students = new List<Student>();
 
-    List<string> headers = new List<string>() {"Engish Name", "Korean Name", "Phone", "Level", "School Name"};
+    List<string> headers = new List<string>() { "Korean Name", "Phone", "Level", "Delete"};
     
     protected override async Task OnInitializedAsync()
     {
         students = await studentRepo.Get();
         StateHasChanged();
+    }
+
+    public async Task HandleRemove(Student student)
+    {
+         ModalDialogOptions options = new ModalDialogOptions()
+        {
+            BackgroundClickToClose = false,
+            Style = "liquid-modal-dialog-title"
+        };
+
+        ModalDialogResult result = await ModalDialog.ShowDialogAsync<ConfirmationModal>($"Do you really want to remove {student.EnglishName} - {student.KoreanName} ?", options);
+
+        if(result.Success)
+        {
+            await studentRepo.Delete(student);
+            students.Remove(student);
+            StateHasChanged();
+        }
     }
 
 }

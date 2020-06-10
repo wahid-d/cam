@@ -10,8 +10,8 @@ using cam.Data;
 namespace cam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200608152042_Student")]
-    partial class Student
+    [Migration("20200610203809_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -345,12 +345,16 @@ namespace cam.Migrations
                         .HasMaxLength(255);
 
                     b.Property<string>("ClassId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("EnglishName")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
 
                     b.Property<string>("KoreanName")
                         .IsRequired()
@@ -443,7 +447,9 @@ namespace cam.Migrations
                 {
                     b.HasOne("cam.Models.Class", "Class")
                         .WithMany("Students")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

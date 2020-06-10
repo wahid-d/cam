@@ -23,11 +23,13 @@
             <table width=100%>
                 <caption class="title-1">@_class.Name</caption>
                 <thead>
-                    <tr style="height: 8rem;">
+                    <tr>
                         <th width=10% scope="col">Name</th>
-                        <th width=5% scope="col" class="vertical">Course </th>
-                        <th width=5% scope="col" class="vertical">Grammar</th>
-                        <th width=5% scope="col" class="vertical">ELT</th>
+                        <th width=5% scope="col" >crs </th>
+                        <th width=5% scope="col" >grm</th>
+                        <th width=5% scope="col" >elt</th>
+                        <th width=5% scope="col" >att</th>
+                        <th width=5% scope="col" >hwk</th>
                         <th width=25% scope="col">Comment</th>
                     </tr>
                 </thead>
@@ -37,18 +39,24 @@
 
                         var iCopy = i;
                         <tr>
-                            <td data-label="@students[i].EnglishName">@students[i].EnglishName</td>
-                            <td data-label="@students[i].EnglishName-@_class.CourseBook">
-                                <input type="numeric" id="@students[i].EnglishName-@_class.CourseBook" required @onchange="@(e => reports[iCopy].CourseScore = Int32.Parse(e.Value.ToString()))">
+                            <td data-label="Ename">@students[i].EnglishName</td>
+                            <td data-label="crs">
+                                <input type="numeric" id="crs" required @onchange="@(e => reports[iCopy].CourseScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
                             </td>
-                            <td data-label="@students[i].EnglishName-@_class.GrammarBook">
-                                <input type="numeric" id="@students[i].EnglishName-@_class.GrammarBook" required @onchange="@(e => reports[iCopy].GrammarScore = Int32.Parse(e.Value.ToString()))">
+                            <td data-label="grm">
+                                <input type="numeric" id="grm" required @onchange="@(e => reports[iCopy].GrammarScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
                             </td>
-                            <td data-label="@students[i].EnglishName-Elt">
-                                <input type="numeric" id="@students[i].EnglishName-Elt" required @onchange="@(e => reports[iCopy].EltScore = Int32.Parse(e.Value.ToString()))">
+                            <td data-label="elt">
+                                <input type="numeric" id="elt" required @onchange="@(e => reports[iCopy].EltScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
                             </td>
-                            <td data-label="@students[i].EnglishName-comment">
-                                <textarea class="textarea-comment" rows="3" id="@students[i].EnglishName-comment" @onchange="@(e => reports[iCopy].Comment = e.Value.ToString())"/>
+                            <td data-label="att">
+                                <input type="numeric" id="att" required @onchange="@(e => reports[iCopy].Attitude = Int32.Parse(e.Value.ToString()))" max="5" min="1">
+                            </td>
+                            <td data-label="hwk">
+                                <input type="numeric" id="hwk" required @onchange="@(e => reports[iCopy].Homework = Int32.Parse(e.Value.ToString()))" max="5" min="1">
+                            </td>
+                            <td data-label="comment">
+                                <textarea class="textarea-comment" rows="3" id="comment" @onchange="@(e => reports[iCopy].Comment = e.Value.ToString())"/>
                             </td>
                         </tr>
                         reports[i].StudentId = students[i].Id;

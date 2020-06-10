@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+using System.IO;
 using System.Runtime.InteropServices;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -29,6 +31,11 @@ namespace cam.Models
         [StringLength(20)]
         [Display(Name="레벨")]
         public string Level { get; set; }
+
+        [Required]
+        [Display(Name="학년")]
+        [Range(1, 12, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
+        public int Grade { get; set; }
 
         [Required]
         [StringLength(20, ErrorMessage = "Phone number is too long.")]

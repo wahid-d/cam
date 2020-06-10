@@ -21,6 +21,12 @@ namespace cam.Models
         [Required]
         public int EltScore { get; set; }
 
+        [Required]
+        public int Attitude { get; set; }
+
+        [Required]
+        public int Homework { get; set; }
+
         public string Comment { get; set; }
 
         [Required]

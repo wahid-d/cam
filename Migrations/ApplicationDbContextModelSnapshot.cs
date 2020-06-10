@@ -289,6 +289,9 @@ namespace cam.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("Attitude")
+                        .HasColumnType("int");
+
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
@@ -299,6 +302,9 @@ namespace cam.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("GrammarScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Homework")
                         .HasColumnType("int");
 
                     b.Property<string>("Period")
@@ -351,10 +357,8 @@ namespace cam.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<string>("Grade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(55)")
-                        .HasMaxLength(55);
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
 
                     b.Property<string>("KoreanName")
                         .IsRequired()

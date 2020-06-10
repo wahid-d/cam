@@ -15,20 +15,24 @@
             <label class="label-1" for="ename">영어 이름<small>*</small></label>
             <input type="text" id="ename" required @bind="student.EnglishName" placeholder="Sarah">
 
-            <label class="label-1" for="kname">Korean name<small>*</small></label>
-            <input type="text" id="kname" required @bind="student.KoreanName">
+            <label class="label-1" for="kname">한국어 이름<small>*</small></label>
+            <input type="text" id="kname" required @bind="student.KoreanName" placeholder="홍길동">
 
-            <label class="label-1" for="school">School<small>*</small></label>
-            <input type="text" id="school" required @bind="student.SchoolName">
+            <label class="label-1" for="phone">전화번호<small>*</small></label>
+            <input type="tel" id="phone" pattern="[0-9]{3}(\-\s)?[0-9]{4}(\-\s)?[0-9]{4}" required @bind="student.Phone" placeholder="010 1234 5678">
 
-            <label class="label-1" for="phone">phone number<small>*</small></label>
-            <input type="tel" id="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" required @bind="student.Phone">
+            <label class="label-1" for="address">주소</label>
+            <input type="address" id="address" @bind="student.Address" placeholder="신도림동 현대 아파트">
 
-            <label class="label-1" for="address">address</label>
-            <input type="address" id="address" @bind="student.Address">
+            <label class="label-1" for="school-name">학교 이름<small>*</small></label>
+            <input type="text" id="school-name" required @bind="student.SchoolName" placeholder="신도림 초등학교">
 
-            <label class="label-1" for="level">level<small>*</small></label>
-            <select type="text" id="level" required @bind="student.Level">
+            <label class="label-1" for="school-name">학년<small>*</small></label>
+            <input type="numeric" id="school-name" required @bind="student.Grade" placeholder="3" max="12" min="1">
+
+
+            <label class="label-1" for="level">레벨<small>*</small></label>
+            <select type="text" id="level" @bind="student.Level" placeholder="Primary 1" required>
                 <option >Select ...</option>
                 @foreach (var level in levels)
                 {
@@ -36,8 +40,8 @@
                 }
             </select>
 
-            <label class="label-1" for="class">Select class<small>*</small></label>
-            <select type="text" id="class" required @bind="student.ClassId">
+            <label class="label-1" for="class">클래스 선택<small>*</small></label>
+            <select type="text" id="class" @bind="student.ClassId" placeholder="클래스 선택" required>
                 <option >Select ...</option>
                 @foreach (var c in classes)
                 {
@@ -52,7 +56,7 @@
 </section>
 
 @code{
-    List<string> levels = new List<string>(){"Select ...", "Primary 1", "Primary 2", "Primary 3", "Primary 4", "Primary 5", "Primary 6"};
+    List<string> levels = new List<string>(){"Primary 1", "Primary 2", "Primary 3", "Primary 4", "Primary 5", "Primary 6"};
     Student student = new Student();
 
     List<Class> classes = new List<Class>();

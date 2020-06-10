@@ -10,45 +10,41 @@
     <button onclick="window.print()" class="submit-btn" style="margin: 1rem auto;">Print</button>
 </div>
 <div class="printable">
-    <img class="cam-logo-print" src="https://media-private.canva.com/MADWmAzAhXo/1/screen.png?response-expires=Mon%2C%2008%20Jun%202020%2020%3A46%3A02%20GMT&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200608T184557Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7204&X-Amz-Credential=AKIAJWF6QO3UH4PAAJ6Q%2F20200608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=effce18d98e8ee2f448a97ccbcb8bb8a727ea37bae3070a6704e28abc1d50e90" height="100px">
+    <img class="cam-logo-print" src="/img/cam-logo.png" height="100px">
     <h1>Cambridge English</h1>
     <h3>@report.Period</h3>
     <h2>@student.EnglishName - @student.KoreanName</h2>
     <table>
-        <caption>Scores</caption>
+        <caption class="title-1">Scores</caption>
         <thead>
             <tr>
-                <th></th>
+                <th width=20%></th>
                 <th width=10%><i class="fas fa-poll-h fa-2x"></i></th>
-                <th><i class="fas fa-star-half-alt fa-2x"></i></th>
-                <th><i class="fas fa-tasks fa-2x"></i></th>
-                <th><i class="far fa-comment fa-2x"></i></th>
+                <th width=19%> <small>Attitude</small> </th>
+                <th width=19%> <small>Homework</small> </th>
+                <th > <small>Comment</small> </th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>Course Book</td>
-                <td>@report.CourseScore</td>
-                <td>⭐⭐⭐⭐⭐</td>
-                <td>⭐⭐⭐⭐⭐</td>
+                <td>@report.CourseScore%</td>
+                <td rowspan="3">@for(int i=0;i<report.Attitude;i++){ <label>⭐</label>}</td>
+                <td rowspan="3">@for(int i=0;i<report.Homework;i++){ <label>⭐</label>}</td>
                 <td rowspan="3" class="comment-wrap"><textarea class="comment-box" value="@report.Comment"></textarea></td>
             </tr>
             <tr>
                 <td>Grammar</td>
-                <td>@report.GrammarScore</td>
-                <td>⭐⭐⭐⭐⭐</td>
-                <td>⭐⭐⭐⭐⭐</td>
+                <td>@report.GrammarScore%</td>
             </tr>
             <tr>
                 <td>ELT</td>
-                <td>@report.EltScore</td>
-                <td>⭐⭐⭐⭐⭐</td>
-                <td>⭐⭐⭐⭐⭐</td>
+                <td>@report.EltScore%</td>
             </tr>
         </tbody>
     </table>
 
-    <h4>Notification:</h4>
+    <h3 class="title-1">Notification:</h3>
     @if(notification != null)
     {
         <textarea class="notification-box">
