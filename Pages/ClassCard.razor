@@ -48,11 +48,12 @@
 
     public async Task RemoveDragged()
     {
-        await InvokeAsync(() =>
-        {
-            Students.Remove(Dragged);
-            StateHasChanged();
-        });
+        if(Students.Contains(Dragged))
+            await InvokeAsync(() =>
+            {
+                Students.Remove(Dragged);
+                StateHasChanged();
+            });
     }
 
     async void HandleDrop()

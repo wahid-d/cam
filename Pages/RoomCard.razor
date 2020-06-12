@@ -49,11 +49,12 @@
 
     public async Task RemoveDragged()
     {
-        await InvokeAsync(() =>
-        {
-            Classes.Remove(Dragged);
-            StateHasChanged();
-        });
+        if(Classes.Contains(Dragged))
+            await InvokeAsync(() =>
+            {
+                Classes.Remove(Dragged);
+                StateHasChanged();
+            });
     }
 
 

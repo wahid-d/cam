@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace cam.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,6 +73,8 @@ namespace cam.Migrations
                     CourseScore = table.Column<int>(nullable: false),
                     GrammarScore = table.Column<int>(nullable: false),
                     EltScore = table.Column<int>(nullable: false),
+                    Attitude = table.Column<int>(nullable: false),
+                    Homework = table.Column<int>(nullable: false),
                     Comment = table.Column<string>(nullable: true),
                     StudentId = table.Column<string>(nullable: false)
                 },

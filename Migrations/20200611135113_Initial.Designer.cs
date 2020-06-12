@@ -10,8 +10,8 @@ using cam.Data;
 namespace cam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200610205443_ReportModelCHanged")]
-    partial class ReportModelCHanged
+    [Migration("20200611135113_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

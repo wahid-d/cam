@@ -143,12 +143,12 @@
 }
 .printable table th
 {
-    border: 2px solid var(--page-txtColor-tint);
+    border: 1px solid var(--page-txtColor-tint);
 }
 .printable table td
 {
     padding: .2rem;
-    border: 2px solid var(--page-txtColor-tint);
+    border: 1px solid var(--page-txtColor-tint);
 }
 .printable textarea:focus
 {
@@ -194,7 +194,7 @@
     }
 
 .printable table tr {
-    border-bottom: 2px solid var(--page-txtColor-tint);
+    border-bottom: 1px solid var(--page-txtColor-tint);
     padding: .1em;
 }
 .printable thead tr {
@@ -208,7 +208,7 @@
     padding: .3rem;
     text-align: center;
     font-size: 1rem;
-    border: 2px solid var(--page-txtColor-tint);
+    border: 1px solid var(--page-txtColor-tint);
 }
 
 .printable table th {

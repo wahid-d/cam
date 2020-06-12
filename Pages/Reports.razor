@@ -47,7 +47,7 @@
     List<Models.Report> sortedReports = new List<Models.Report>();
     List<Student> students = new List<Student>();
     List<Class> classes = new List<Class>();
-    public string period;
+
      protected override async Task OnInitializedAsync()
     {
         classes = await classRepo.Get();
