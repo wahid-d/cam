@@ -45,6 +45,14 @@ namespace cam.Services
             await _context.SaveChangesAsync();
             return c;
         }
+
+        public async Task<Class> Remove(Class @class)
+        {
+            var result = _context.Classes.Remove(@class);
+            await _context.SaveChangesAsync();
+            return result.Entity;
+        }
+
     }
 
     public interface IClassService
@@ -55,5 +63,6 @@ namespace cam.Services
         Task<Class> Insert(Class @class);
 
         Task<Class> Update(Class @class);
+        Task<Class> Remove(Class @class);
     }
 }

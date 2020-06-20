@@ -19,18 +19,18 @@ namespace cam.Services
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<AppUser> Insert(AppUser AppUser)
-        {
+        // public async Task<AppUser> Insert(AppUser AppUser)
+        // {
    
-            return AppUser;
-        }
+        //     return AppUser;
+        // }
     }
 
     public interface IUserService
     {
         Task<List<AppUser>> Get();
         // Task<AppUser> Get(int id);
-        Task<AppUser> Insert(AppUser AppUser);
+        // Task<AppUser> Insert(AppUser AppUser);
         // Task<AppUser> Update(ToDo toDo);
         // Task<AppUser> Delete(int id);
     }

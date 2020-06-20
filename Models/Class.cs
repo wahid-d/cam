@@ -24,7 +24,6 @@ namespace cam.Models
         [Required]
         public string GrammarBook { get; set; }
 
-        [Required]
         public string RoomId { get; set; }
         public Room Room { get; set; }
 

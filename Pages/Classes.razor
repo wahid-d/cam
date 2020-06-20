@@ -7,9 +7,22 @@
 @inject IClassService classRepo
 
 <section class="grid-container">
-    @foreach(var c in classes)
-    {
-        <ClassCard Class="@c" OnDragStart="DragStart" Dragged="@Dragged"/>
+    @{
+        var unsorted = new Class();
+        @foreach(var c in classes)
+        {
+            if(c.Name.ToLower() != "unsorted")
+            {
+                <ClassCard Class="@c" OnDragStart="DragStart"  Dragged="@Dragged"/>
+            }
+            else
+            {
+                System.Console.WriteLine($"{c.Name} {DateTime.Now}");
+                unsorted = c;
+            }
+        }
+        <ClassCard Class="@unsorted" OnDragStart="DragStart" Dragged="@Dragged"/>
+
     }
 
     <div class="grid-25 mobile-grid-100 tablet-grid-50 suffix-75 card-fluid">
@@ -75,20 +88,15 @@
     List<Room> rooms = new List<Room>();
     List<Student> students = new List<Student>();
     List<Class> classes = new List<Class>();
-
     
     Class cl = new Class();
     protected override async Task OnInitializedAsync()
     {
-        rooms = await roomRepo.Get();
-        StateHasChanged();
-        students = await studentRepo.Get();
-        StateHasChanged();
         classes = await classRepo.Get();
+        students = await studentRepo.Get();
         foreach(var c in classes)
-        {
             c.Students = students.Where(s=>s.ClassId == c.Id).ToList();
-        }
+        rooms = await roomRepo.Get();
         StateHasChanged();
     }
 
@@ -103,5 +111,12 @@
     void DragStart(Student student)
     {
         Dragged = student;
+    }
+
+    async void RemoveCard(Class @class)
+    {
+        var removed = await classRepo.Remove(@class);
+        classes.Remove(removed);
+        StateHasChanged();
     }
 }

@@ -49,10 +49,17 @@
     public Class Dragged { get; set; }
 
     Room room = new Room();
+    Room Common = null;
 
     protected override async Task OnInitializedAsync()
     {
         rooms = await roomRepo.Get();
+
+        if(rooms.Where(r => r.Name.ToLowerInvariant() == "common").Any())
+            Common = rooms.Where(r => r.Name.ToLowerInvariant() == "common").FirstOrDefault();
+        else
+            await CreateCommonRoom();
+
         foreach (var room in rooms)
         {   
             room.Classes = await classRepo.GetForRoom(room.Id);
@@ -60,6 +67,13 @@
         StateHasChanged();
         teachers = await userRepo.Get();
         StateHasChanged();
+    }
+
+    async Task CreateCommonRoom()
+    {
+        var common = new Room() { Name = "COMMON", SupervisorUserName = "user@gmail.com" };
+        await roomRepo.Insert(common);
+        rooms = await roomRepo.Get();
     }
 
     private async void SaveRoom()

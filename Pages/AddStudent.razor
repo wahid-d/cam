@@ -33,7 +33,7 @@
 
             <label class="label-1" for="level">레벨<small>*</small></label>
             <select type="text" id="level" @bind="student.Level" placeholder="Primary 1" required>
-                <option >Select ...</option>
+                <option ></option>
                 @foreach (var level in levels)
                 {
                     <option value=@level>@level</option>
@@ -42,7 +42,7 @@
 
             <label class="label-1" for="class">클래스 선택<small>*</small></label>
             <select type="text" id="class" @bind="student.ClassId" placeholder="클래스 선택" required>
-                <option >Select ...</option>
+                <option></option>
                 @foreach (var c in classes)
                 {
                     <option value=@c.Id>@c.Name</option>

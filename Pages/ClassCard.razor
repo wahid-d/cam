@@ -8,7 +8,6 @@
 @inject IModalDialogService ModalDialog
 
 <div  class="grid-30 mobile-grid-100 tablet-grid-50 card-fluid" style="margin-top:1rem;" 
-        @onclick="@( e => NavigationManager.NavigateTo($"/report/{Class.Id}"))"
         @ondrop="@(e => HandleDrop())" 
         ondragover="event.preventDefault()">
     <div class="card-body" >
@@ -27,22 +26,43 @@
             @* var r = rooms.Where(r => r.Id == c.RoomId).FirstOrDefault();
             <label class="label-1" >Room - <strong>@r.Name</strong></label> *@
         }
+
+        @if(Class.Name.ToLowerInvariant() != "unsorted")
+        {
+            <div>
+                <div style="float: left; margin-top: 1rem; margin-bottom: .5rem;">
+                    <button @onclick="@( e => NavigationManager.NavigateTo($"/report/{Class.Id}"))"> 
+                        <i class="fas fa-file-contract fa-2x"></i>
+                    </button>
+                </div>
+                <div style="float: right; margin-top: 1rem; margin-bottom: .5rem;">
+                    <button >
+                        <i class="fas fa-edit fa-lg"></i>
+                    </button>
+                    <button @onclick="@(e => { HandleRemoveClicked(); })"> 
+                        <i class="fas fa-trash fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        }
     </div>
 </div>
 
 @code
 {   
     [Parameter] public Student Dragged { get; set; } = new Student();
-    [Parameter] public Class Class { get; set; }
+    [Parameter] public Class Class { get; set; } = new Class();
 
     public List<Student> Students { get; set; }
 
 
     [Parameter] public EventCallback<Student> OnDragStart {get; set; }
+    [Parameter] public EventCallback<Class> OnRemoveCard {get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         Notify.NotifyDelete += RemoveDragged;
+        System.Console.WriteLine(Class != null);
         Students = await studentRepo.GetForClass(Class.Id);
     }
 
@@ -58,15 +78,9 @@
 
     async void HandleDrop()
     {
-         ModalDialogOptions options = new ModalDialogOptions()
-        {
-            BackgroundClickToClose = false,
-            Style = "liquid-modal-dialog-title"
-        };
+        string message = $"Do you wish to move {Dragged.EnglishName} to {Class.Name} ?";
 
-        ModalDialogResult result = await ModalDialog.ShowDialogAsync<ConfirmationModal>($"Do you wish to move {Dragged.EnglishName} to {Class.Name} ?", options);
-
-        if(result.Success)
+        if((await ShowModalWithMessage(message)).Success)
         {
             if(Dragged != null && !Students.Exists(e => e.Id == Dragged.Id))
             {
@@ -77,6 +91,28 @@
                 StateHasChanged();
             }
         }
+    }
+
+
+    async void HandleRemoveClicked()
+    {
+        string message = $"Do you want to REMOVE {Class.Name} class? All students inside this class will be moved to UNSORTED class!";
+
+        if((await ShowModalWithMessage(message)).Success)
+        {
+            await OnRemoveCard.InvokeAsync(Class);
+        }
+    }
+
+    async Task<ModalDialogResult> ShowModalWithMessage(string message)
+    {
+        ModalDialogOptions options = new ModalDialogOptions()
+        {
+            BackgroundClickToClose = false,
+            Style = "liquid-modal-dialog-title"
+        };
+        
+        return await ModalDialog.ShowDialogAsync<ConfirmationModal>(message, options);
     }
 
     public void Dispose()

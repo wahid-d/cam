@@ -47,7 +47,7 @@ namespace cam.Models
         [Display(Prompt="신도림동 현대 아파트", Name="주소")]
         public string Address { get; set; }
 
-        [Required]
+
         [Display(Name="클래스 선택")]        
         public string ClassId { get; set; }
         public Class Class { get; set; }
