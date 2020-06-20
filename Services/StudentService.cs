@@ -16,6 +16,7 @@ namespace cam.Services
         Task<Student> Get(string id);
         Task<Student> Insert(Student student);
         Task<Student> Update(Student student);
+        Task UpdateRange(List<Student> students);
         Task Delete(string id);
         Task Delete(Student student);
     }
@@ -77,6 +78,11 @@ namespace cam.Services
             _context.Students.Update(s);
             await _context.SaveChangesAsync();
             return student;
+        }
+        public async Task UpdateRange(List<Student> students)
+        {
+            _context.Students.UpdateRange(students);
+            await _context.SaveChangesAsync();
         }
     }
 }

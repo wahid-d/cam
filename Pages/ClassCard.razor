@@ -8,7 +8,6 @@
 @inject IModalDialogService ModalDialog
 
 <div  class="grid-30 mobile-grid-100 tablet-grid-50 card-fluid" style="margin-top:1rem;" 
-        @onclick="@( e => NavigationManager.NavigateTo($"/report/{Class.Id}"))"
         @ondrop="@(e => HandleDrop())" 
         ondragover="event.preventDefault()">
     <div class="card-body" >
@@ -26,6 +25,19 @@
 
             @* var r = rooms.Where(r => r.Id == c.RoomId).FirstOrDefault();
             <label class="label-1" >Room - <strong>@r.Name</strong></label> *@
+
+
+            if(Class.Name != "UNSORTED")
+            {
+                <div style="padding: 1rem 0;">
+                    <button style="float: left;" @onclick="@( e => NavigationManager.NavigateTo($"/report/{Class.Id}"))">
+                        <i class="fas fa-file-contract fa-2x"></i>
+                    </button>
+                    <button style="float: right;" @onclick="@(e => { OnRemoveClicked(); })">
+                        <i class="fas fa-trash fa-2x"></i>
+                    </button>
+                </div>
+            }
         }
     </div>
 </div>
@@ -39,12 +51,14 @@
 
 
     [Parameter] public EventCallback<Student> OnDragStart {get; set; }
+    [Parameter] public EventCallback<Class> OnRemoveClass {get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         Notify.NotifyDelete += RemoveDragged;
         Students = await studentRepo.GetForClass(Class.Id);
     }
+
 
     public async Task RemoveDragged()
     {
@@ -58,13 +72,8 @@
 
     async void HandleDrop()
     {
-         ModalDialogOptions options = new ModalDialogOptions()
-        {
-            BackgroundClickToClose = false,
-            Style = "liquid-modal-dialog-title"
-        };
-
-        ModalDialogResult result = await ModalDialog.ShowDialogAsync<ConfirmationModal>($"Do you wish to move {Dragged.EnglishName} to {Class.Name} ?", options);
+         var message = $"Do you wish to move {Dragged.EnglishName} to {Class.Name} ?";
+         var result = await ShowModal(message);
 
         if(result.Success)
         {
@@ -82,5 +91,25 @@
     public void Dispose()
     {
         Notify.NotifyDelete -= RemoveDragged;
+    }
+
+    async void OnRemoveClicked()
+    {
+        var message = $"Really REMOVE {Class.Name} class?";
+        var result = await ShowModal(message);
+        if(result.Success)
+        {
+            await OnRemoveClass.InvokeAsync(Class);
+        }
+    }
+
+    async Task<ModalDialogResult> ShowModal(string message)
+    {
+        ModalDialogOptions options = new ModalDialogOptions()
+        {
+            BackgroundClickToClose = false,
+            Style = "liquid-modal-dialog-title"
+        };
+        return  await ModalDialog.ShowDialogAsync<ConfirmationModal>(message, options);
     }
 }

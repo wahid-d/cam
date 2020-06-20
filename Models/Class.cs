@@ -15,16 +15,12 @@ namespace cam.Models
 
         public ICollection<Student> Students { get; set; }
 
-        [Required]
         public string Time { get; set; }
 
-        [Required]
         public string CourseBook { get; set; }
 
-        [Required]
         public string GrammarBook { get; set; }
 
-        [Required]
         public string RoomId { get; set; }
         public Room Room { get; set; }
 

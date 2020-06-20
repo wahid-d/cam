@@ -45,6 +45,15 @@ namespace cam.Services
             await _context.SaveChangesAsync();
             return c;
         }
+
+        public async Task Remove(Class @class)
+        {
+            if(!(await _context.Students.Where(s => s.ClassId == @class.Id).AnyAsync()))
+            {
+                _context.Classes.Remove(@class);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 
     public interface IClassService
@@ -55,5 +64,6 @@ namespace cam.Services
         Task<Class> Insert(Class @class);
 
         Task<Class> Update(Class @class);
+        Task Remove(Class @class);
     }
 }

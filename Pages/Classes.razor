@@ -9,8 +9,9 @@
 <section class="grid-container">
     @foreach(var c in classes)
     {
-        <ClassCard Class="@c" OnDragStart="DragStart" Dragged="@Dragged"/>
+        <ClassCard Class="@c" OnDragStart="DragStart" Dragged="@Dragged" OnRemoveClass="@RemoveClass"/>
     }
+
 
     <div class="grid-25 mobile-grid-100 tablet-grid-50 suffix-75 card-fluid">
         <div class="card-body">
@@ -87,10 +88,11 @@
         classes = await classRepo.Get();
         foreach(var c in classes)
         {
-            c.Students = students.Where(s=>s.ClassId == c.Id).ToList();
+            c.Students = students.Where(s=>s.ClassId == c.Id).ToList(); 
         }
         StateHasChanged();
     }
+    
 
     private async void SaveClass()
     {
@@ -98,6 +100,16 @@
         classes = await classRepo.Get();
         cl = new Class();
         StateHasChanged();
+    }
+
+    private async void RemoveClass(Class @class)
+    {
+        if(!(await studentRepo.Get()).Where(s => s.ClassId == @class.Id).Any())
+        {
+            await classRepo.Remove(@class);
+            classes.Remove(@class);
+            StateHasChanged();
+        }
     }
 
     void DragStart(Student student)
