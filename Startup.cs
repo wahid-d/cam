@@ -43,7 +43,6 @@ namespace cam
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
-            services.AddSingleton<WeatherForecastService>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoomService, RoomService>();
@@ -85,7 +84,7 @@ namespace cam
             app.UseAuthentication();
             app.UseAuthorization();
 
-            
+
 
             app.UseEndpoints(endpoints =>
             {
