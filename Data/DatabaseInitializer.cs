@@ -47,11 +47,11 @@ namespace cam.Data
         {
             // add super admin 
             var superadmin = new AppUser() { Email = "sadmin@cam.eng", UserName = "SuperAdmin" };
-            SeedUser(userManager, superadmin, password: "__sadmin", "superadmin");
+            SeedUser(userManager, superadmin, password: "sadmin", "superadmin");
 
             // add  admin 
             var admin = new AppUser() { Email = "admin@cam.eng", UserName = "Admin" };
-            SeedUser(userManager, admin, password: "__admin", "admin");
+            SeedUser(userManager, admin, password: "admin", "admin");
             
             // add teachers
             var teachers = new []
@@ -88,7 +88,9 @@ namespace cam.Data
                         System.Console.WriteLine($"User NOT created with email {user.Email} ...");
                 }
                 else
+                {
                     System.Console.WriteLine($"User NOT created with email {user.Email}. Duplicate email ...");
+                }
             }
             catch(Exception e)
             {

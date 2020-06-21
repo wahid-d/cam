@@ -208,10 +208,10 @@ namespace cam.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Time = table.Column<string>(nullable: false),
-                    CourseBook = table.Column<string>(nullable: false),
-                    GrammarBook = table.Column<string>(nullable: false),
-                    RoomId = table.Column<string>(nullable: false)
+                    Time = table.Column<string>(nullable: true),
+                    CourseBook = table.Column<string>(nullable: true),
+                    GrammarBook = table.Column<string>(nullable: true),
+                    RoomId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -221,7 +221,7 @@ namespace cam.Migrations
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -231,12 +231,12 @@ namespace cam.Migrations
                     Id = table.Column<string>(nullable: false),
                     EnglishName = table.Column<string>(maxLength: 255, nullable: false),
                     KoreanName = table.Column<string>(maxLength: 255, nullable: false),
-                    SchoolName = table.Column<string>(maxLength: 55, nullable: false),
-                    Level = table.Column<string>(maxLength: 20, nullable: false),
+                    SchoolName = table.Column<string>(maxLength: 55, nullable: true),
+                    Level = table.Column<string>(maxLength: 20, nullable: true),
                     Grade = table.Column<int>(nullable: false),
-                    Phone = table.Column<string>(maxLength: 20, nullable: false),
-                    Address = table.Column<string>(maxLength: 255, nullable: false),
-                    ClassId = table.Column<string>(nullable: false)
+                    Phone = table.Column<string>(maxLength: 20, nullable: true),
+                    Address = table.Column<string>(maxLength: 255, nullable: true),
+                    ClassId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -246,8 +246,18 @@ namespace cam.Migrations
                         column: x => x.ClassId,
                         principalTable: "Classes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Classes",
+                columns: new[] { "Id", "CourseBook", "GrammarBook", "Name", "RoomId", "Time" },
+                values: new object[] { "1", null, null, "UNSORTED", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Rooms",
+                columns: new[] { "Id", "Name", "SupervisorUserName" },
+                values: new object[] { "1", "Library", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

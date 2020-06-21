@@ -10,8 +10,8 @@ using cam.Data;
 namespace cam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200621171933_Seeding")]
-    partial class Seeding
+    [Migration("20200621182134_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
