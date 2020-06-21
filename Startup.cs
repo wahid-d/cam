@@ -39,7 +39,8 @@ namespace cam
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
 
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
@@ -84,7 +85,7 @@ namespace cam
             app.UseAuthentication();
             app.UseAuthorization();
 
-
+            DatabaseInitializer.SeedData(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>
             {
