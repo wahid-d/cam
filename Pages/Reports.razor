@@ -8,13 +8,24 @@
 
 <section class="page-body">
     <div class="table-wrapper card">
+        
         <label class="label-1" for="period">Select the period<small>*</small></label>
-        <select type="text" id="period" required @onchange="@(e => {sortedReports = e.Value.ToString() == "All" ? reports : reports.Where(r => r.Period.ToLower() == e.Value.ToString().ToLower()).ToList(); StateHasChanged();})">
-            <option >All</option>
+        <select type="text" id="period" @onchange="@(e => { Sort(e.Value.ToString(), "period"); })">
+            <option value="All">All</option>
             <option value="@String.Format("{0:MMM} {1}", DateTime.Now.AddMonths(-1), DateTime.Now.Year)">@DateTime.Now.AddMonths(-1).ToString("MMMM")</option>
             <option value="@String.Format("{0:MMM} {1}", DateTime.Now, DateTime.Now.Year)">@DateTime.Now.ToString("MMMM")</option>
             <option value="@String.Format("{0:MMM} {1}", DateTime.Now.AddMonths(1), DateTime.Now.Year)">@DateTime.Now.AddMonths(1).ToString("MMMM")</option>
         </select>
+
+        <label class="label-1" for="class">Select the class<small>*</small></label>
+        <select type="text" id="class" @onchange="@(e => { Sort(e.Value.ToString(), "class"); })">
+            <option value="All">All</option>
+            @foreach (var c in classes)
+            {
+                <option value="@c.Id">@c.Name</option>
+            }
+        </select>
+
         <table>
             <caption class="title-1">Reports</caption>
             <thead>
@@ -48,11 +59,39 @@
     List<Student> students = new List<Student>();
     List<Class> classes = new List<Class>();
 
+    string period = "All";
+    string classId = "All";
+
      protected override async Task OnInitializedAsync()
     {
         classes = await classRepo.Get();
         students = await studentRepo.Get();
         reports = sortedReports = await reportRepo.Get();
         StateHasChanged();
+    }
+
+    void Sort(string constraint, string source)
+    {
+        if(source == "class")
+            classId = constraint;
+        else
+            period = constraint;
+
+        
+        sortedReports = period == "All" ? reports : reports.Where(r => r.Period.ToLower() == period.ToLower()).ToList();
+        sortedReports = classId == "All" ? sortedReports : sortedReports.Where(r => { return ReportBelongsToClass(r); }).ToList();
+    }
+
+    public bool ReportBelongsToClass(cam.Models.Report report)
+    {
+        var student = students.Where(s => s.Id == report.StudentId).FirstOrDefault();
+        if(student == null)
+            return false;
+
+        var c = classes.Where(cl => cl.Id == student.ClassId).FirstOrDefault();
+        if(c == null)
+            return false;
+
+        return c.Id == classId;
     }
 }

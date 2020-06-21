@@ -1,17 +1,62 @@
+using System.Linq;
 using System;
+using cam.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace cam.Data
 {
     public static class DatabaseInitializer
     {
-        public static void SeedData(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static void SeedData(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
         {
             System.Console.WriteLine("\n============= Seeding ROLES ===============");
             SeedRoles(roleManager);
             System.Console.WriteLine("\n\n============= Seeding USERS ===============");
             SeedUsers(userManager);
-            System.Console.WriteLine("============= Seeding DONE ===============\n");
+            System.Console.WriteLine("============= Seeding DONE ===============\n\n");
+
+
+            SeedRooms(userManager, context);
+            SeedClass(context);
+        }
+
+        private static void SeedClass(ApplicationDbContext context)
+        {
+            var library = context.Rooms.Where(r => r.Name == "Library").FirstOrDefault();
+            if((context.Classes.Where(r => r.Name == "UNSORTED").FirstOrDefault()) == null)
+            {
+                var cl = new Class() { Room = library, RoomId = library.Id, Name = "UNSORTED",  GrammarBook = "", CourseBook = "", Time = "" };
+                var result = context.Classes.AddAsync(cl).Result;
+                var saveResult = context.SaveChangesAsync().Result;
+            }
+            else
+            {
+                System.Console.WriteLine($"UNSORTED class already exists ...");
+            }
+        }
+
+        private static void SeedRooms(UserManager<AppUser> userManager, ApplicationDbContext context)
+        {
+            var rooms = new []{ "London", "NewYork", "Athen", "Paris", "Rome", "Library" };
+            foreach(var room in rooms)
+            {
+                if((context.Rooms.Where(r => r.Name == room).FirstOrDefault()) == null)
+                {
+                    var user = userManager.FindByNameAsync(room).Result;
+                    if(user != null)
+                    {
+                        var createResult = context.Rooms.AddAsync(new Room() { Name = room, SupervisorUserName = user.UserName }).Result;
+                    }
+                    else
+                        System.Console.WriteLine($"Could NOT create room {room} ...");   
+                }
+                else
+                {
+                    System.Console.WriteLine($"Room {room} already exists ...");
+                }
+            }
+
+            var result = context.SaveChangesAsync().Result;
         }
 
         private static void SeedRoles(RoleManager<IdentityRole> roleManager)

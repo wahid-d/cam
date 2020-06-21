@@ -63,7 +63,8 @@ namespace cam
         public void Configure(IApplicationBuilder app, 
                                 IWebHostEnvironment env,
                                 UserManager<AppUser> userManager,
-                                RoleManager<IdentityRole> roleManager)
+                                RoleManager<IdentityRole> roleManager,
+                                ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -85,7 +86,7 @@ namespace cam
             app.UseAuthentication();
             app.UseAuthorization();
 
-            DatabaseInitializer.SeedData(userManager, roleManager);
+            DatabaseInitializer.SeedData(userManager, roleManager, context);
 
             app.UseEndpoints(endpoints =>
             {

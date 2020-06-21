@@ -2,7 +2,6 @@
 @using cam.Models
 @using cam.Services
 @inject NavigationManager NavigationManager
-@inject IStudentService studentRepo
 @inject IRoomService roomRepo
 @inject IClassService classRepo
 
@@ -11,7 +10,6 @@
     {
         <ClassCard Class="@c" OnDragStart="DragStart" Dragged="@Dragged" OnRemoveClass="@RemoveClass"/>
     }
-
 
     <div class="grid-25 mobile-grid-100 tablet-grid-50 suffix-75 card-fluid">
         <div class="card-body">
@@ -83,13 +81,8 @@
     {
         rooms = await roomRepo.Get();
         StateHasChanged();
-        students = await studentRepo.Get();
-        StateHasChanged();
         classes = await classRepo.Get();
-        foreach(var c in classes)
-        {
-            c.Students = students.Where(s=>s.ClassId == c.Id).ToList(); 
-        }
+        System.Console.WriteLine(classes.Count);
         StateHasChanged();
     }
     
@@ -104,12 +97,9 @@
 
     private async void RemoveClass(Class @class)
     {
-        if(!(await studentRepo.Get()).Where(s => s.ClassId == @class.Id).Any())
-        {
-            await classRepo.Remove(@class);
-            classes.Remove(@class);
-            StateHasChanged();
-        }
+        await classRepo.Remove(@class);
+        classes.Remove(@class);
+        StateHasChanged();
     }
 
     void DragStart(Student student)

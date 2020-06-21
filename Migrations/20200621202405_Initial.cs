@@ -249,16 +249,6 @@ namespace cam.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Classes",
-                columns: new[] { "Id", "CourseBook", "GrammarBook", "Name", "RoomId", "Time" },
-                values: new object[] { "1", null, null, "UNSORTED", null, null });
-
-            migrationBuilder.InsertData(
-                table: "Rooms",
-                columns: new[] { "Id", "Name", "SupervisorUserName" },
-                values: new object[] { "1", "Library", null });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",

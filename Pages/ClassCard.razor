@@ -46,7 +46,6 @@
 {   
     [Parameter] public Student Dragged { get; set; } = new Student();
     [Parameter] public Class Class { get; set; }
-
     public List<Student> Students { get; set; }
 
 
@@ -95,11 +94,15 @@
 
     async void OnRemoveClicked()
     {
-        var message = $"Really REMOVE {Class.Name} class?";
-        var result = await ShowModal(message);
-        if(result.Success)
+        var students = await studentRepo.GetForClass(Class.Id);
+        if(students == null || students.Count == 0)
         {
-            await OnRemoveClass.InvokeAsync(Class);
+            var message = $"Really REMOVE {Class.Name} class?";
+            var result = await ShowModal(message);
+            if(result.Success)
+            {
+                await OnRemoveClass.InvokeAsync(Class);
+            }
         }
     }
 

@@ -38,11 +38,7 @@ namespace cam.Data
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
-
-            
-            modelBuilder.Entity<Class>().HasData(new Class() { Name = "UNSORTED", Id = "1" });
-            modelBuilder.Entity<Room>().HasData(new Room() { Name = "Library", Id = "1" });
-
+                
             base.OnModelCreating(modelBuilder);
         }
 

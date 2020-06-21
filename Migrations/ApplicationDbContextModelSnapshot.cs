@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cam.Data;
 
 namespace cam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200621182134_Initial")]
-    partial class Initial
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,13 +257,6 @@ namespace cam.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Classes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Name = "UNSORTED"
-                        });
                 });
 
             modelBuilder.Entity("cam.Models.Notification", b =>
@@ -340,13 +331,6 @@ namespace cam.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Name = "Library"
-                        });
                 });
 
             modelBuilder.Entity("cam.Models.Student", b =>
