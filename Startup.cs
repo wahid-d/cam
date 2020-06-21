@@ -9,6 +9,7 @@ using cam.Areas.Identity;
 using cam.Data;
 using cam.Services;
 using Blazor.ModalDialog;
+using Microsoft.AspNetCore.Identity;
 
 namespace cam
 {
@@ -59,7 +60,10 @@ namespace cam
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+                                IWebHostEnvironment env,
+                                UserManager<AppUser> userManager,
+                                RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -80,6 +84,8 @@ namespace cam
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            
 
             app.UseEndpoints(endpoints =>
             {
