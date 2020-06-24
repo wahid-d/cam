@@ -19,7 +19,7 @@ jobs:
     - name: Build the latest Docker image
       run: docker build . -t davidwahid/cam:latest
     - name: Push the latest Docker image
-      run: docker push davidwahid/mmk.api:latest
+      run: docker push davidwahid/cam:latest
   
   
   deploy:
