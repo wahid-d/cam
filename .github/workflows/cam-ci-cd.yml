@@ -1,0 +1,51 @@
+name: CAM CI/CD
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build the latest Docker image
+      run: docker build . -t davidwahid/cam:latest
+    - name: Push the latest Docker image
+      run: docker push davidwahid/mmk.api:latest
+  
+  
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy cam App to DigitalOcean
+        uses: appleboy/ssh-action@master
+        env: 
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          password: ${{ secrets.DO_PASSWORD }}
+          port: ${{ secrets.DO_PORT }}
+          envs: GITHUB_USERNAME, GITHUB_TOKEN
+          script: |
+            
+            cd cam
+            git pull origin develop
+            dotnet ef database update
+            cd ..
+            
+            docker pull davidwahid/cam:latest
+            docker stop cam
+            docker rm cam
+            docker run --restart=always -d --network host --name cam  davidwahid/cam:latest &>> cam.log
