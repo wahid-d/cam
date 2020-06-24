@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -51,8 +52,12 @@ namespace cam
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<INotificationsService, NotificationsService>();
 
-
             services.AddSingleton<NotifyService>();
+
+            services.AddHttpClient<DriveService>(client =>
+            {
+                client.BaseAddress = new Uri("https://script.google.com/macros/s/");
+            });
 
 
             // Modal Dialog

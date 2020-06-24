@@ -1,11 +1,27 @@
 @page "/students"
 @using cam.Models
 @using cam.Services
+@using Microsoft.AspNetCore.Components
 @inject IStudentService studentRepo
+@inject IClassService classRepo
 @inject IModalDialogService ModalDialog
+@inject DriveService driveService
 
 <section class="page-body">
     <div class="table-wrapper card">
+        <div>
+            <div style="width: 50%; float: left;">
+                <label class="label-1" for="sort">Sort by class<small>*</small><i class="fas fa-sort-amount-down"></i></label>
+                <select type="text" id="sort" @onchange="@(e => {  Sort(e.Value.ToString()); })">
+                    <option value="All">All</option>
+                    @foreach (var c in classes)
+                    {
+                        <option value="@c.Id">@c.Name</option>        
+                    }
+                </select>
+            </div>
+            <button disabled="@IsDisabled" @onclick="@(async e => { await LoadStudents(); })" class="right secondary">Sync Drive<i class="@driveIconClass"></i></button>
+        </div>
         <table>
             <caption class="title-1">List of students</caption>
             <thead>
@@ -17,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var student in students)
+                @foreach (var student in sorted)
                 {
                     
                     <tr>
@@ -34,31 +50,96 @@
 @code
 {
     List<Student> students = new List<Student>();
+    List<Student> sorted = new List<Student>();
+    List<Class> classes = new List<Class>();
 
     List<string> headers = new List<string>() { "Korean Name", "Level", "Delete"};
+
+    bool IsDisabled = false;
+    string driveIconClass = "fab fa-google-drive fa-lg";
     
     protected override async Task OnInitializedAsync()
     {
-        students = await studentRepo.Get();
+        sorted = students = await studentRepo.Get();
+        classes = await classRepo.Get();
         StateHasChanged();
+    }
+
+    void Sort(string classId)
+    {
+        if(classId.ToLower() == "all")
+        {
+            sorted = students;
+            return;
+        }
+        sorted = students.Where(s => s.ClassId == classId).ToList(); 
     }
 
     public async Task HandleRemove(Student student)
     {
-         ModalDialogOptions options = new ModalDialogOptions()
-        {
-            BackgroundClickToClose = false,
-            Style = "liquid-modal-dialog-title"
-        };
-
-        ModalDialogResult result = await ModalDialog.ShowDialogAsync<ConfirmationModal>($"Do you really want to remove {student.EnglishName} - {student.KoreanName} ?", options);
-
+        var result = await ShowModal($"Do you really want to remove {student.EnglishName} - {student.KoreanName} ?");
         if(result.Success)
         {
             await studentRepo.Delete(student);
             students.Remove(student);
             StateHasChanged();
         }
+    }
+
+    async Task LoadStudents()
+    {
+        var URL = "AKfycbxWg7DcRa9V2rj4-_05qS_o384o_tCud18gyvsxMJJS3E0SD0Gt/exec?source=students";
+
+        ToggleLoading(true);
+        await SaveStudents(await driveService.GetStudents(URL));
+        ToggleLoading(false);
+    }
+
+    async Task SaveStudents(List<Student> students)
+    {
+        if(students == null || students.Count < 1)
+        {
+            await ShowPopup("Error occured!", "Could NOT get students from Drive ...");
+        }
+        else
+        {
+            var result = await studentRepo.InsertRange(students);
+            if(!string.IsNullOrWhiteSpace(result))
+            {
+                result = result.Length < 25 ? result : result.Substring(0, 22) + "...";
+                await ShowPopup("Error occured!", result);
+            }
+            StateHasChanged();
+        }
+    }
+
+    void ToggleLoading(bool loading)
+    {
+        IsDisabled = loading;
+        driveIconClass = loading ? "fas fa-sync fa-lg fa-spin" : "fab fa-google-drive fa-lg";
+    }
+
+    async Task<ModalDialogResult> ShowModal(string message)
+    {
+        ModalDialogOptions options = new ModalDialogOptions()
+        {
+            BackgroundClickToClose = false,
+            Style = "liquid-modal-dialog-title"
+        };
+        return  await ModalDialog.ShowDialogAsync<ConfirmationModal>(message, options);
+    }
+    async Task<ModalDialogResult> ShowPopup(string title, string message)
+    {
+        ModalDialogOptions options = new ModalDialogOptions()
+        {
+            BackgroundClickToClose = true,
+            Style = "liquid-modal-dialog-title"
+        };
+
+        var parameters = new ModalDialogParameters();
+        parameters.Add(nameof(message), message);
+
+        return  await ModalDialog.ShowDialogAsync<PopupModal>(title, options, parameters);
     }
 
 }

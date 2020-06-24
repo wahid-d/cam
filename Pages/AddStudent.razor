@@ -7,6 +7,7 @@
 
 <section class="page-body">
     <div class="form-wrapper card">
+        
         <EditForm Model="@student" OnValidSubmit="SaveStudent">
             <DataAnnotationsValidator />
 
@@ -18,11 +19,12 @@
             <label class="label-1" for="kname">한국어 이름<small>*</small></label>
             <input type="text" id="kname" required @bind="student.KoreanName" placeholder="홍길동">
 
-            <label class="label-1" for="phone">전화번호<small>*</small></label>
-            <input type="tel" id="phone" pattern="[0-9]{3}(\-\s)?[0-9]{4}(\-\s)?[0-9]{4}" required @bind="student.Phone" placeholder="010 1234 5678">
+            <label class="label-1" for="selfphone">전화번호<small>*</small></label>
+            <input type="tel" id="selfphone" pattern="[0-9]{3}(\-\s)?[0-9]{4}(\-\s)?[0-9]{4}" @bind="student.SelfPhone" placeholder="010 1234 5678">
+            
+            <label class="label-1" for="phone">전화번호(맘)<small>*</small></label>
+            <input type="tel" id="phone" pattern="[0-9]{3}(\-\s)?[0-9]{4}(\-\s)?[0-9]{4}" required @bind="student.ParentPhone" placeholder="010 1234 5678">
 
-            <label class="label-1" for="address">주소</label>
-            <input type="address" id="address" @bind="student.Address" placeholder="신도림동 현대 아파트" required>
 
             <label class="label-1" for="school-name">학교 이름<small>*</small></label>
             <input type="text" id="school-name" required @bind="student.SchoolName" placeholder="신도림 초등학교">
@@ -30,6 +32,8 @@
             <label class="label-1" for="school-name">학년<small>*</small></label>
             <input type="numeric" id="school-name" required @bind="student.Grade" placeholder="3" max="12" min="1">
 
+            <label class="label-1" for="address">주소</label>
+            <input type="address" id="address" @bind="student.Address" placeholder="신도림동 현대 아파트" required>
 
             <label class="label-1" for="level">레벨<small>*</small></label>
             <select type="text" id="level" @bind="student.Level" placeholder="Primary 1" required>

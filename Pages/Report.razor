@@ -7,9 +7,7 @@
 @inject IReportService reportRepo
 
 <section class="">
-    <EditForm Model="@reports" OnValidSubmit="SaveReports" class="page-body"> 
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+    <div class="page-body"> 
         <div class="table-wrapper card">
             <label class="label-1" for="period">Select the period<small>*</small></label>
             <select type="text" id="period" required @bind="period">
@@ -19,9 +17,9 @@
                 <option value="@String.Format("{0:MMM} {1}", DateTime.Now.AddMonths(1), DateTime.Now.Year)">@DateTime.Now.AddMonths(1).ToString("MMMM")</option>
             </select>
 
+            <h3 class="title-1" width="100%">@_class.Name</h3>
 
             <table width=100%>
-                <caption class="title-1">@_class.Name</caption>
                 <thead>
                     <tr>
                         <th width=10% scope="col">Name</th>
@@ -31,44 +29,18 @@
                         <th width=5% scope="col" >att</th>
                         <th width=5% scope="col" >hwk</th>
                         <th width=25% scope="col">Comment</th>
+                        <th width=3% scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @for(int i = 0; i < reports.Count; i++)
+                    @foreach (var student in students)
                     {
-
-                        var iCopy = i;
-                        <tr>
-                            <td data-label="Ename">@students[i].EnglishName</td>
-                            <td data-label="crs">
-                                <input type="numeric" id="crs" required @onchange="@(e => reports[iCopy].CourseScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
-                            </td>
-                            <td data-label="grm">
-                                <input type="numeric" id="grm" required @onchange="@(e => reports[iCopy].GrammarScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
-                            </td>
-                            <td data-label="elt">
-                                <input type="numeric" id="elt" required @onchange="@(e => reports[iCopy].EltScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
-                            </td>
-                            <td data-label="att">
-                                <input type="numeric" id="att" required @onchange="@(e => reports[iCopy].Attitude = Int32.Parse(e.Value.ToString()))" max="5" min="1">
-                            </td>
-                            <td data-label="hwk">
-                                <input type="numeric" id="hwk" required @onchange="@(e => reports[iCopy].Homework = Int32.Parse(e.Value.ToString()))" max="5" min="1">
-                            </td>
-                            <td data-label="comment">
-                                <textarea class="textarea-comment" rows="3" id="comment" @onchange="@(e => reports[iCopy].Comment = e.Value.ToString())"/>
-                            </td>
-                        </tr>
-                        reports[i].StudentId = students[i].Id;
-                        reports[i].Period = period;
+                        <StudentReportRow Student="@student" Period="@period"/>
                     }
                 </tbody>
             </table>
-            <button type="submit" class="submit-btn">
-                Generate Reports
-            </button>
         </div>
-    </EditForm>
+    </div>
 </section>
 
 
@@ -77,27 +49,15 @@
 
     [Parameter]
     public string ClassId { get; set; }
-
-    string period = "June 2020";
-
+    string period = "";
     Class _class = new Class();
-
-    List<Models.Report> reports = new List<Models.Report>();
-
     List<Student> students = new List<Student>();
 
     protected override async Task OnInitializedAsync()
     {
         _class = await classRepo.Get(ClassId);
+        
+        students = (await studentRepo.Get()).Where(s => s.ClassId == ClassId).ToList();
         StateHasChanged();
-        students = (await studentRepo.Get()).Where(s=>s.ClassId == ClassId).ToList();
-        reports.AddRange(Enumerable.Repeat(new Models.Report(), students.Count));
-        StateHasChanged();
-    }
-
-    async void SaveReports()
-    {
-        await reportRepo.InsertMany(reports);
-        NavigationManager.NavigateTo("/reports");
     }
 }

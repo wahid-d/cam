@@ -36,16 +36,28 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var report in sortedReports)
-                {
-                    <tr>
-                        <td data-label=@report.Id>@report.Period</td>
-                        <td data-label=@report.Id> @(students.Where(s=>s.Id == report.StudentId).FirstOrDefault().EnglishName) </td>
-                        <td data-label=@report.Id> 
-                            @* <a href="/printreport/{@report.Id}">See</a> *@
-                            <button onclick="window.open('/printreport/@report.Id', 'Report', 'location=0, status=0, scrollbars=1,resizable=0, width=650,height=910').moveTo(0,0)" class="badge">See Report</button> 
-                        </td>
-                    </tr>
+                @{
+                    if(sortedReports.Count > 0)
+                    {
+                        foreach (var report in sortedReports)
+                        {
+                            var student = GetStudent(report.StudentId);
+                            <tr>
+                                <td data-label=@report.Id>@report.Period</td>
+                                @if(student == null)
+                                {
+                                    <td data-label=@report.Id>student NOT FOUND</td>
+                                }
+                                else
+                                {
+                                    <td data-label=@report.Id>@student.EnglishName - @student.KoreanName</td>  
+                                }
+                                <td data-label=@report.Id> 
+                                    <button onclick="window.open('/printreport/@report.Id', 'Report', 'location=0, status=0, scrollbars=1,resizable=0, width=650,height=910').moveTo(0,0)" class="badge">See Report</button> 
+                                </td>
+                            </tr>
+                        }
+                    }
                 }
             </tbody>
         </table>
@@ -66,7 +78,8 @@
     {
         classes = await classRepo.Get();
         students = await studentRepo.Get();
-        reports = sortedReports = await reportRepo.Get();
+        reports = await reportRepo.Get();
+        sortedReports = reports != null ? reports : new List<Models.Report>();
         StateHasChanged();
     }
 
@@ -93,5 +106,14 @@
             return false;
 
         return c.Id == classId;
+    }
+
+    Student GetStudent(string studentId)
+    {
+        var student = students.Find(s => s.Id == studentId);
+        if(student == null)
+            return new Student();
+        
+        return student;
     }
 }

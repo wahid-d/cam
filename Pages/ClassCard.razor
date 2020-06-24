@@ -13,7 +13,7 @@
     <div class="card-body" >
         <h2 class="title-1">@Class.Name</h2>
         @{
-            <ul class="list">
+            <ul class="list max-400">
             @if(Students != null)
                 @foreach(var student in Students)
                 {
@@ -104,8 +104,24 @@
                 await OnRemoveClass.InvokeAsync(Class);
             }
         }
+        else
+        {
+            await ShowPopup("Warning ...", "You need to MOVE all students first!");
+        }
     }
 
+    async Task<ModalDialogResult> ShowPopup(string title, string message)
+    {
+        ModalDialogOptions options = new ModalDialogOptions()
+        {
+            BackgroundClickToClose = true,
+            Style = "liquid-modal-dialog-title"
+        };
+        var parameters = new ModalDialogParameters();
+        parameters.Add(nameof(message), message);
+
+        return  await ModalDialog.ShowDialogAsync<PopupModal>(title, options, parameters);
+    }
     async Task<ModalDialogResult> ShowModal(string message)
     {
         ModalDialogOptions options = new ModalDialogOptions()

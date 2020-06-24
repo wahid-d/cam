@@ -1,0 +1,97 @@
+@using cam.Models
+@using cam.Services
+@inject NavigationManager NavigationManager
+@inject IClassService classRepo
+@inject IStudentService studentRepo
+@inject IReportService reportRepo
+@inject IModalDialogService ModalDialog
+
+<tr>
+    <td data-label="Ename">@Student.EnglishName</td>
+    <td data-label="crs">
+        <input type="numeric" id="crs" required @onchange="@(e => Report.CourseScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
+    </td>
+    <td data-label="grm">
+        <input type="numeric" id="grm" required @onchange="@(e => Report.GrammarScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
+    </td>
+    <td data-label="elt">
+        <input type="numeric" id="elt" required @onchange="@(e => Report.EltScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
+    </td>
+    <td data-label="att">
+        <input type="numeric" id="att" required @onchange="@(e => Report.Attitude = Int32.Parse(e.Value.ToString()))" max="5" min="1">
+    </td>
+    <td data-label="hwk">
+        <input type="numeric" id="hwk" required @onchange="@(e => Report.Homework = Int32.Parse(e.Value.ToString()))" max="5" min="1">
+    </td>
+    <td data-label="comment">
+        <textarea class="textarea-comment" rows="3" id="comment" @onchange="@(e => Report.Comment = e.Value.ToString())"/>
+    </td>
+    <td>
+        <button @onclick="@(async() => {  await SaveReport(); } )" 
+                class="badge" style="background-color: var(--blue);">Save</button>
+        <button onclick="window.open('/printreport/@Report.Id', 'Report', 'location=0, status=0, scrollbars=1,resizable=0, width=650,height=910').moveTo(0,0)" 
+                class="badge" disabled="@IsDisabled"
+                style="opacity: @opacity;">Print</button>
+    </td>
+</tr>
+
+@code
+{
+    [Parameter] public Student Student { get; set; }
+    [Parameter] public string Period { get; set; }
+
+    bool IsDisabled = true;
+
+    float opacity = 0.5f;
+
+    public Models.Report Report { get; set; } = new Models.Report();
+    
+    protected override void OnInitialized()
+    {
+        Report = new Models.Report();
+    }
+    async Task SaveReport()
+    {
+        if(string.IsNullOrWhiteSpace(Period))
+        {
+            await ShowPopup("Warning ...", "Select a PERIOD first!");
+            return;
+        }
+
+        System.Console.WriteLine(Period);
+
+        if(Report.Homework <= 0 ||
+           Report.Attitude <= 0 ||
+           Report.GrammarScore <= 0 ||
+           Report.CourseScore <= 0||
+           Report.EltScore <= 0 ||
+           Report.Comment.Length < 1)
+        {
+            await ShowPopup("Warning ...", "Fill in all fields!");
+            return;
+        }
+
+        Report.Period = Period;
+        Report.StudentId = Student.Id;
+
+        Report = await reportRepo.Insert(Report);
+        if(!string.IsNullOrWhiteSpace(Report.Id))
+        {
+            IsDisabled = false;
+            opacity = 1f;
+        }
+    }
+
+    async Task<ModalDialogResult> ShowPopup(string title, string message)
+    {
+        ModalDialogOptions options = new ModalDialogOptions()
+        {
+            BackgroundClickToClose = true,
+            Style = "liquid-modal-dialog-title"
+        };
+        var parameters = new ModalDialogParameters();
+        parameters.Add(nameof(message), message);
+
+        return  await ModalDialog.ShowDialogAsync<PopupModal>(title, options, parameters);
+    }
+}

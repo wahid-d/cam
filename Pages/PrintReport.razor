@@ -45,12 +45,9 @@
     </table>
 
     <h3 class="title-1">Notification:</h3>
-    @if(notification != null)
-    {
-        <textarea class="notification-box">
-            @notification.Content
-        </textarea>
-    }
+    <textarea class="notification-box">
+        @notificationContent
+    </textarea>
 
 </div>
 
@@ -60,20 +57,19 @@
     public string reportId { get; set; }
     public Student student = new Student();
     public Models.Report report = new Models.Report();
-    public Notification notification = new Notification();
+    public Notification Notification = new Notification();
+
+    string notificationContent = "No notifications found ...";
 
      protected override async Task OnInitializedAsync()
     {
 
         report = await reportRepo.Get(reportId);
         student = await studentRepo.Get(report.StudentId);
-        notification = await notificationRepo.Get(report.Period);
+        Notification = await notificationRepo.Get(report.Period);
+        if(Notification != null)
+            notificationContent = Notification.Content.TrimStart();
         StateHasChanged();
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        
     }
 
 }
