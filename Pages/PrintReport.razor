@@ -51,8 +51,8 @@
 
 </div>
 
-@code{
-
+@code
+{
     [Parameter]
     public string reportId { get; set; }
     public Student student = new Student();
@@ -71,5 +71,4 @@
             notificationContent = Notification.Content.TrimStart();
         StateHasChanged();
     }
-
 }
