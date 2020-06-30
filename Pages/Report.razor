@@ -5,12 +5,13 @@
 @inject IClassService classRepo
 @inject IStudentService studentRepo
 @inject IReportService reportRepo
+@inject NotifyService Notify
 
 <section class="">
     <div class="page-body"> 
         <div class="table-wrapper card">
             <label class="label-1" for="period">Select the period<small>*</small></label>
-            <select type="text" id="period" required @bind="period">
+            <select type="text" id="period" required @onchange="@( (e) => { period = e.Value.ToString(); OnChanged(e.Value.ToString()); })">
                 <option >Select...</option>
                 <option value="@String.Format("{0:MMM} {1}", DateTime.Now.AddMonths(-1), DateTime.Now.Year)">@DateTime.Now.AddMonths(-1).ToString("MMMM")</option>
                 <option value="@String.Format("{0:MMM} {1}", DateTime.Now, DateTime.Now.Year)">@DateTime.Now.ToString("MMMM")</option>
@@ -35,7 +36,7 @@
                 <tbody>
                     @foreach (var student in students)
                     {
-                        <StudentReportRow Student="@student" Period="@period"/>
+                        <StudentReportRow Student="@student" Period="@period" />
                     }
                 </tbody>
             </table>
@@ -60,4 +61,10 @@
         students = (await studentRepo.Get()).Where(s => s.ClassId == ClassId).ToList();
         StateHasChanged();
     }
+
+    public void OnChanged(string period)
+    {
+        Notify.OnChange(period);
+    }
+
 }

@@ -6,14 +6,22 @@ namespace cam.Services
     public class NotifyService
     {
         // Can be called from anywhere
-    public async Task Delete()
-    {
-        if (NotifyDelete != null)
+        public async Task Delete()
         {
-            await NotifyDelete.Invoke();
+            if (NotifyDelete != null)
+            {
+                await NotifyDelete.Invoke();
+            }
         }
-    }
+        public void OnChange(string arg)
+        {
+            if (NotifyChange != null)
+            {
+                NotifyChange(arg);
+            }
+        }
 
-    public event Func<Task> NotifyDelete;
+        public event Func<Task> NotifyDelete;
+        public event Action<string> NotifyChange;
     }
 }

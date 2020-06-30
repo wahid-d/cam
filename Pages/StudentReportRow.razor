@@ -5,26 +5,28 @@
 @inject IStudentService studentRepo
 @inject IReportService reportRepo
 @inject IModalDialogService ModalDialog
+@inject NotifyService Notify
+@implements IDisposable 
 
 <tr>
     <td data-label="Ename">@Student.EnglishName</td>
     <td data-label="crs">
-        <input type="numeric" id="crs" required @onchange="@(e => Report.CourseScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
+        <input type="numeric" id="crs" required @bind="Report.CourseScore" max="100" min="0">
     </td>
     <td data-label="grm">
-        <input type="numeric" id="grm" required @onchange="@(e => Report.GrammarScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
+        <input type="numeric" id="grm" required @bind="Report.GrammarScore" max="100" min="0">
     </td>
     <td data-label="elt">
-        <input type="numeric" id="elt" required @onchange="@(e => Report.EltScore = Int32.Parse(e.Value.ToString()))" max="100" min="0">
+        <input type="numeric" id="elt" required @bind="Report.EltScore" max="100" min="0">
     </td>
     <td data-label="att">
-        <input type="numeric" id="att" required @onchange="@(e => Report.Attitude = Int32.Parse(e.Value.ToString()))" max="5" min="1">
+        <input type="numeric" id="att" required @bind="Report.Attitude" max="5" min="1">
     </td>
     <td data-label="hwk">
-        <input type="numeric" id="hwk" required @onchange="@(e => Report.Homework = Int32.Parse(e.Value.ToString()))" max="5" min="1">
+        <input type="numeric" id="hwk" required @bind="Report.Homework" max="5" min="1">
     </td>
     <td data-label="comment">
-        <textarea class="textarea-comment" rows="3" id="comment" @onchange="@(e => Report.Comment = e.Value.ToString())"/>
+        <textarea class="textarea-comment" rows="3" id="comment" @bind="Report.Comment"/>
     </td>
     <td>
         <button @onclick="@(async() => {  await SaveReport(); } )" 
@@ -44,11 +46,17 @@
 
     float opacity = 0.5f;
 
-    public Models.Report Report { get; set; } = new Models.Report();
-    
-    protected override void OnInitialized()
+    [Parameter] public Models.Report Report { get; set; } = new Models.Report();
+
+    protected override void OnInitialized( )
     {
-        Report = new Models.Report();
+        Notify.NotifyChange += OnChange;
+    }
+
+    public async void OnChange(string arg)
+    {
+        Report = await GetReport(Student.Id, arg);
+        StateHasChanged();
     }
     async Task SaveReport()
     {
@@ -57,8 +65,6 @@
             await ShowPopup("Warning ...", "Select a PERIOD first!");
             return;
         }
-
-        System.Console.WriteLine(Period);
 
         if(Report.Homework <= 0 ||
            Report.Attitude <= 0 ||
@@ -93,5 +99,15 @@
         parameters.Add(nameof(message), message);
 
         return  await ModalDialog.ShowDialogAsync<PopupModal>(title, options, parameters);
+    }
+
+    async Task<Models.Report> GetReport(string studentId, string period)
+    {
+        return await reportRepo.Get(studentId, period);
+    }
+
+    public void Dispose()
+    {
+        Notify.NotifyChange -= OnChange;
     }
 }

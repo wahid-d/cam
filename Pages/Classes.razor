@@ -82,7 +82,6 @@
         rooms = await roomRepo.Get();
         StateHasChanged();
         classes = await classRepo.Get();
-        System.Console.WriteLine(classes.Count);
         StateHasChanged();
     }
     
