@@ -66,12 +66,11 @@
             return;
         }
 
-        if(Report.Homework <= 0 ||
-           Report.Attitude <= 0 ||
-           Report.GrammarScore <= 0 ||
-           Report.CourseScore <= 0||
-           Report.EltScore <= 0 ||
-           Report.Comment.Length < 1)
+        if(Report.Homework < 0 ||
+           Report.Attitude < 0 ||
+           Report.GrammarScore < 0 ||
+           Report.CourseScore < 0||
+           Report.EltScore < 0)
         {
             await ShowPopup("Warning ...", "Fill in all fields!");
             return;
