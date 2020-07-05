@@ -126,11 +126,12 @@
 {
     background-color: transparent;
     border: none;
-    padding: 1rem 1.5rem;
+    padding: 1rem 0;
     font-size: 12px;
     color: black;
     width: 100%;
-    height: 100%;
+    height: 60%;
+    box-shadow: none;
 }
 
 .comment-wrap
@@ -151,6 +152,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    box-shadow: none;
 }
 
 .printable
@@ -158,7 +160,8 @@
     width: 210mm;
     height: 297mm;
     margin: auto;
-    box-shadow: none;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.31);
+    padding: 18px;
 }
 .printable table tr
 {
@@ -187,7 +190,7 @@
 {
     position: absolute;
     top: 4.8rem;
-    left: 65%;
+    left: 70%;
 }
 
 
@@ -197,7 +200,7 @@
     {
         position: absolute;
         top: 1%;
-        left: 83%;
+        left: 85%;
     }
     body * 
     {
