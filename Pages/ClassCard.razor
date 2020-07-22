@@ -14,7 +14,7 @@
         <h2 class="title-1">@Class.Name - <small>@Class.Time</small></h2>
         <p><small>@Room.Name</small></p>
         @{
-            @* <ul class="list max-400">
+            <ul class="list max-400">
                 @if(Students != null)
                 {
                     @foreach(var student in Students)
@@ -25,9 +25,9 @@
                     }
 
                 }
-            </ul> *@
+            </ul>
 
-            if(Class.Name != "UNSORTED")
+            @* if(Class.Name != "UNSORTED")
             {
                 <div style="padding: 1rem 0;">
                     <button style="float: left;" @onclick="@( e => NavigationManager.NavigateTo($"/report/{Class.Id}"))">
@@ -37,7 +37,7 @@
                         <i class="fas fa-trash fa-2x"></i>
                     </button>
                 </div>
-            }
+            } *@
         }
     </div>
 </div>
