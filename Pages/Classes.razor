@@ -1,4 +1,4 @@
-@page "/"
+
 @page "/classes"
 @using cam.Models
 @using cam.Services
@@ -7,9 +7,12 @@
 @inject IClassService classRepo
 
 <section class="grid-container">
-    @foreach(var c in classes)
+    @if(classes != null && classes.Count > 0)
     {
-        <ClassCard Class="@c" OnDragStart="DragStart" Dragged="@Dragged" OnRemoveClass="@RemoveClass"/>
+        foreach(var c in classes)
+        {
+            <ClassCard Class="@c" OnDragStart="DragStart" Dragged="@Dragged" OnRemoveClass="@RemoveClass"/>
+        }
     }
 
     <div class="grid-25 mobile-grid-100 tablet-grid-50 suffix-75 card-fluid">
