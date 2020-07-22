@@ -14,19 +14,18 @@
         <h2 class="title-1">@Class.Name - <small>@Class.Time</small></h2>
         <p><small>@Room.Name</small></p>
         @{
-            <ul class="list max-400">
-            @if(Students != null)
-                @foreach(var student in Students)
+            @* <ul class="list max-400">
+                @if(Students != null)
                 {
-                    <li class="list-item" draggable="true" @ondragstart="@(e => { OnDragStart.InvokeAsync(student); })">
-                        @student.EnglishName - @student.KoreanName
-                    </li>
+                    @foreach(var student in Students)
+                    {
+                        <li class="list-item" draggable="true" @ondragstart="@(e => { OnDragStart.InvokeAsync(student); })">
+                            @student.EnglishName - @student.KoreanName
+                        </li>
+                    }
+
                 }
-            </ul>
-
-            @* var r = rooms.Where(r => r.Id == c.RoomId).FirstOrDefault();
-            <label class="label-1" >Room - <strong>@r.Name</strong></label> *@
-
+            </ul> *@
 
             if(Class.Name != "UNSORTED")
             {
