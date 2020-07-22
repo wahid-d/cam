@@ -19,7 +19,7 @@
                 @foreach(var student in Students)
                 {
                     <li class="list-item" draggable="true" @ondragstart="@(e => { OnDragStart.InvokeAsync(student); })">
-                        @* @student.EnglishName - @student.KoreanName *@
+                        @student.EnglishName - @student.KoreanName
                     </li>
                 }
             </ul>
