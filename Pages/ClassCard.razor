@@ -72,7 +72,7 @@
             return;
         }
 
-        SortedStudents = Students.Where(s => s.EnglishName.Contains(searchText) || s.KoreanName.Contains(searchText)).ToList();
+        SortedStudents = Students.Where(s => s.EnglishName.ToLower().Contains(searchText.ToLower()) || s.KoreanName.Contains(searchText)).ToList();
         StateHasChanged();
     }
 
