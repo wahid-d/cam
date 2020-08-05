@@ -11,7 +11,7 @@
     {
         foreach(var c in classes)
         {
-            <ClassCard Class="@c" OnDragStart="DragStart" Dragged="@Dragged" OnRemoveClass="@RemoveClass"/>
+             <ClassCard Class="@c" OnDragStart="DragStart" Dragged="@Dragged" OnRemoveClass="@RemoveClass"/>
         }
     }
 
@@ -21,48 +21,48 @@
             <EditForm Model="@cl" OnValidSubmit="SaveClass">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
-            <label class="label-1" for="name">Class Name<small>*</small></label>
-            <input type="text" id="name" required @bind="cl.Name">
+                <label class="label-1" for="name">Class Name<small>*</small></label>
+                <input type="text" id="name" required @bind="cl.Name">
 
-            <label class="label-1" for="time">Class Time<small>*</small></label>
-            <select type="text" id="time" required @bind="cl.Time">
-                <option>Select...</option>
-                @foreach (var t in classTimes)
-                {
-                    <option value=@t>@t</option>
-                }
-            </select>
+                <label class="label-1" for="time">Class Time<small>*</small></label>
+                <select type="text" id="time" required @bind="cl.Time">
+                    <option></option>
+                    @foreach (var t in classTimes)
+                    {
+                        <option value=@t>@t</option>
+                    }
+                </select>
 
-            <label class="label-1" for="cbook">Course Book<small>*</small></label>
-            <select type="text" id="cbook" required @bind="cl.CourseBook">
-                <option>Select...</option>
-                @foreach (var cbook in cBooks)
-                {
-                    <option value=@cbook>@cbook</option>
-                }
-            </select>
-            
-            <label class="label-1" for="gbook">Grammar Book<small>*</small></label>
-            <select type="text" id="gbook" required @bind="cl.GrammarBook">
-                <option>Select...</option>
-                @foreach (var gbook in gBooks)
-                {
-                    <option value=@gbook>@gbook</option>
-                }
-            </select>
+                <label class="label-1" for="cbook">Course Book<small>*</small></label>
+                <select type="text" id="cbook" required @bind="cl.CourseBook">
+                    <option></option>
+                    @foreach (var cbook in cBooks)
+                    {
+                        <option value=@cbook>@cbook</option>
+                    }
+                </select>
+                
+                <label class="label-1" for="gbook">Grammar Book<small>*</small></label>
+                <select type="text" id="gbook" required @bind="cl.GrammarBook">
+                    <option></option>
+                    @foreach (var gbook in gBooks)
+                    {
+                        <option value=@gbook>@gbook</option>
+                    }
+                </select>
 
-            <label class="label-1" for="room">Room<small>*</small></label>
-            <select type="text" id="room" required @bind="cl.RoomId">
-                <option>Select...</option>
-                @foreach (var room in rooms)
-                {
-                    <option value=@room.Id>@room.Name</option>
-                }
-            </select>
+                <label class="label-1" for="room">Room<small>*</small></label>
+                <select type="text" id="room" required @bind="cl.RoomId">
+                    <option></option>
+                    @foreach (var room in rooms)
+                    {
+                        <option value=@room.Id>@room.Name</option>
+                    }
+                </select>
 
-            <button type="submit" class="submit-btn">
-                    Add
-            </button>
+                <button type="submit" class="submit-btn">
+                        Add
+                </button>
             </EditForm>
         </div>
     </div>

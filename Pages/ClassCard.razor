@@ -11,13 +11,14 @@
         @ondrop="@(e => HandleDrop())" 
         ondragover="event.preventDefault()">
     <div class="card-body" >
-        <h2 class="title-1">@Class.Name - <small>@Class.Time</small></h2>
-        <p><small>@Room.Name</small></p>
+        <input @onchange="@(e => SearchChanged(e.Value.ToString()))" placeholder="Search ..." style="height: 2rem; font-size: 1.2rem;">
+        <h2 class="title-1">@Class.Name - <!--<small>@Class.Time</small>--> </h2>
+        @* <p><small>@Room.Name</small></p> *@
         @{
             <ul class="list max-400">
-                @if(Students != null)
+                @if(SortedStudents != null)
                 {
-                    @foreach(var student in Students)
+                    @foreach(var student in SortedStudents)
                     {
                         <li class="list-item" draggable="true" @ondragstart="@(e => { OnDragStart.InvokeAsync(student); })">
                             @student.EnglishName - @student.KoreanName
@@ -47,6 +48,7 @@
     [Parameter] public Student Dragged { get; set; } = new Student();
     [Parameter] public Class Class { get; set; }
     public List<Student> Students { get; set; }
+    public List<Student> SortedStudents { get; set; }
     public Room Room { get; set; } = new Room();
 
 
@@ -56,10 +58,23 @@
     protected override async Task OnInitializedAsync()
     {
         Notify.NotifyDelete += RemoveDragged;
-        Students = await studentRepo.GetForClass(Class.Id);
-        Room = await roomRepo.Get(Class.RoomId);
+        SortedStudents = Students = await studentRepo.GetForClass(Class.Id);
+        @* Room = await roomRepo.Get(Class.RoomId); *@
     }
 
+
+    void SearchChanged(string searchText)
+    {
+        if(string.IsNullOrWhiteSpace(searchText))
+        {
+            SortedStudents = Students;
+            StateHasChanged();
+            return;
+        }
+
+        SortedStudents = Students.Where(s => s.EnglishName.Contains(searchText) || s.KoreanName.Contains(searchText)).ToList();
+        StateHasChanged();
+    }
 
     public async Task RemoveDragged()
     {
